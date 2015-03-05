@@ -140,6 +140,10 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    simple_token_authentication (1.8.0)
+      actionmailer (>= 3.2.6, < 5)
+      actionpack (>= 3.2.6, < 5)
+      devise (~> 3.2)
     slop (3.6.0)
     spring (1.2.0)
     sprockets (2.12.3)
@@ -187,6 +191,7 @@ DEPENDENCIES
   pg
   rails (= 4.2.0)
   sass-rails (= 5.0.1)
+  simple_token_authentication (~> 1.0)
   spring (= 1.2.0)
   turbolinks (= 2.5.3)
   tzinfo-data

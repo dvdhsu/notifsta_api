@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.2.0'
 
+gem 'simple_token_authentication', '~> 1.0' # see semver.org
+
 # Standard Rails gems
 gem 'rails', '4.2.0'
 gem 'sass-rails', '5.0.1'

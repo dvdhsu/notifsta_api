@@ -6,7 +6,7 @@ NotifstaWebapp::Application.routes.draw do
   scope 'api' do
     scope 'v1' do
       scope 'auth' do
-        get 'login' => 'api_authentication#login'
+        post 'login' => 'api_authentication#login'
         get 'logout' => 'api_authentication#logout'
         get 'get_authentication_token' => 'api_authentication#get_authentication_token'
       end

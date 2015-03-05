@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.0'
 
 gem 'simple_token_authentication', '~> 1.0' # REST API authentication
+gem 'mina' # deployment
 
 # Standard Rails gems
 gem 'rails', '4.2.0'

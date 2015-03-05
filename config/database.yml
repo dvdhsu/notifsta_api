@@ -1,12 +1,18 @@
 # PostgreSQL
 #   Ensure the PostgreSQL gem is defined in your Gemfile
 #   gem 'pg'
-development:
+default: &default
   adapter: postgresql
-  encoding: utf8
+  encoding: unicode
+  username: <%= ENV["PG_USERNAME"] %>
+  password: <%= ENV["PG_PASSWORD"] %>
+
+development:
+  <<: *default
   database: notifsta_webapp_development
-  username: dvdhsu
-  host: localhost
   pool: 5
-  port: 5432
   
+production:
+  <<: *default
+  database: notifsta_webapp_production
+  pool: 25

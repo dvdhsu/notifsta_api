@@ -10,6 +10,7 @@ NotifstaWebapp::Application.routes.draw do
         get 'logout' => 'api_authentication#logout'
         get 'get_authentication_token' => 'api_authentication#get_authentication_token'
       end
+      resources :users, only: [:index, :show], controller: :api_users
       resources :events, only: [:index, :show], controller: :api_events do
         resources :channels, only: [:index], controller: :api_channels do
           resources :messages, only: [:index], controller: :api_messages

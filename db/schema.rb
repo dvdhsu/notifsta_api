@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20150306020207) do
     t.integer "user_id"
   end
 
+  add_index "channels_users", ["channel_id", "user_id"], name: "index_channels_users_on_channel_id_and_user_id", using: :btree
+
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -42,6 +44,8 @@ ActiveRecord::Schema.define(version: 20150306020207) do
     t.integer "event_id"
     t.integer "user_id"
   end
+
+  add_index "events_users", ["event_id", "user_id"], name: "index_events_users_on_event_id_and_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false

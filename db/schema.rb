@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150305022021) do
+ActiveRecord::Schema.define(version: 20150306020207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,11 @@ ActiveRecord::Schema.define(version: 20150305022021) do
 
   add_index "channels", ["event_id"], name: "index_channels_on_event_id", using: :btree
 
+  create_table "channels_users", force: :cascade do |t|
+    t.integer "channel_id"
+    t.integer "user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -32,6 +37,11 @@ ActiveRecord::Schema.define(version: 20150305022021) do
   end
 
   add_index "events", ["name"], name: "index_events_on_name", using: :btree
+
+  create_table "events_users", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "user_id"
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false

@@ -1,4 +1,6 @@
 class ApiUsersController < ApplicationController
+  acts_as_token_authentication_handler_for User
+
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users.json

@@ -11,7 +11,7 @@ class ApiUsersController < ApplicationController
 
   # GET /users/1.json
   def show
-    render json: { status: "success", data: @user.as_json(include: :events) }
+    render json: { status: "success", data: @user.as_json(include: [:events, :channels]) }
   end
 
   # POST /users.json

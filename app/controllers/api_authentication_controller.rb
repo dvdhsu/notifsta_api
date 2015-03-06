@@ -7,7 +7,7 @@ class ApiAuthenticationController < ApplicationController
   def login
     @user = User.where(email: params[:email]).first
     if not @user.nil? and @user.valid_password?(params[:password])
-      render json: { status: "success", data: @user.as_json(include: :events) }
+      render json: { status: "success", data: @user.as_json(include: [:events, :channels]) }
     else
       render json: { status: "failure" }
     end

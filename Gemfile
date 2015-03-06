@@ -3,6 +3,7 @@ ruby '2.2.0'
 
 gem 'simple_token_authentication', '~> 1.0' # REST API authentication
 gem 'mina' # deployment
+gem 'figaro', '1.0.0' # secrets
 
 # Standard Rails gems
 gem 'rails', '4.2.0'
@@ -32,9 +33,6 @@ gem 'bootstrap-sass', '3.3.3'
 group :development, :test do
   gem 'byebug', '3.5.1'
   gem 'web-console', '2.0.0'
-
-  # Figaro: https://github.com/laserlemon/figaro
-  gem 'figaro', '1.0.0'
 
   # Spring: https://github.com/rails/spring
   gem 'spring', '1.2.0'

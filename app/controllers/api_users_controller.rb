@@ -14,7 +14,7 @@ class ApiUsersController < ApplicationController
     if @user.nil?
       render json: { status: "failure", error: "couldn't find user" }
     else
-      render json: { status: "success", data: @user.as_json(include: [:events, :channels]) }
+      render json: { status: "success", data: @user.as_json(include: { events: { include: :channels } }) }
     end
   end
 

@@ -16,14 +16,13 @@ class ApiMessagesController < ApplicationController
 
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
+    @channel = Channel.find(params[:channel_id])
+    @message = @channel.messages.new(message_params)
 
-    respond_to do |format|
-      if @message.save
-        format.json { render :show, status: :created, location: @message }
-      else
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
+    if @message.save
+      render json: { status: "success", data: @message }
+    else
+      render json: { status: "failure", data: @message.errors }
     end
   end
 
@@ -54,6 +53,6 @@ class ApiMessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params[:message]
+      params.require(:message).permit(:message_guts)
     end
 end

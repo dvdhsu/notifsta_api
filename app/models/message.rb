@@ -4,8 +4,8 @@ class Message < ActiveRecord::Base
   validates :message_guts, presence: true
   validates :channel, presence: true
 
-  after_save :parse_push_notify
-  after_save :roost_push_notify
+  after_commit :parse_push_notify
+  after_commit :roost_push_notify
 
   private
     def parse_push_notify

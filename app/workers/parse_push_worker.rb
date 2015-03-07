@@ -6,8 +6,6 @@ class ParsePushWorker
   def perform(message_id)
     Parse.init(application_id: ENV["PARSE_APPLICATION_ID"], api_key: ENV["PARSE_REST_API_KEY"], quiet: false)
     @message = Message.find(message_id)
-    puts @message.channel.event.name
-    puts @message.channel.name
     data = {
       alert: @message.message_guts ,
       # TODO: this needs to be changed to event.id
@@ -17,6 +15,7 @@ class ParsePushWorker
     }
     # TODO: this needs to be changed to channel.id
     push = Parse::Push.new(data, @message.channel.name)
+    puts "Sending Parse push notification..."
     push.save
   end
 

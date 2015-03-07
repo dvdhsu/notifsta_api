@@ -33,5 +33,10 @@ module NotifstaWebapp
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
+    # allow everything through CORS. Very insecure. Should be fixed.
+    config.action_dispatch.default_headers.merge!({
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Request-Method' => '*'
+    })
   end
 end

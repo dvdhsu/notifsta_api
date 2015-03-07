@@ -5,13 +5,22 @@ class ApiMessagesController < ApplicationController
 
   # GET /messages.json
   def index
-    @messages = Channel.find(params[:channel_id]).messages
-    render json: { status: "success", data: @messages }
+    @channel = Channel.find_by_id(params[:channel_id])
+    if @channel.nil?
+      render json: { status: "failure", error: "couldn't find channel" }
+    else
+      @messages = @channel.messages
+      render json: { status: "success", data: @messages }
+    end
   end
 
   # GET /messages/1.json
   def show
-    render json: { status: "success", data: @message }
+    if @message.nil?
+      render json: { status: "failure", error: "couldn't find message" }
+    else
+      render json: { status: "success", data: @message }
+    end
   end
 
   # POST /messages.json
@@ -52,7 +61,7 @@ class ApiMessagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
-      @message = Message.find(params[:id])
+      @message = Message.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

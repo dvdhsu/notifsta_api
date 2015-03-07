@@ -11,7 +11,11 @@ class ApiEventsController < ApplicationController
 
   # GET /events/1.json
   def show
-    render json: { status: "success", data: @event.as_json(include: :channels) }
+    if @event.nil?
+      render json: { status: "failure", error: "couldn't find event" }
+    else
+      render json: { status: "success", data: @event.as_json(include: :channels) }
+    end
   end
 
   # POST /events.json
@@ -49,7 +53,7 @@ class ApiEventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.find(params[:id])
+      @event = Event.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

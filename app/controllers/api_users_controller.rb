@@ -11,7 +11,11 @@ class ApiUsersController < ApplicationController
 
   # GET /users/1.json
   def show
-    render json: { status: "success", data: @user.as_json(include: [:events, :channels]) }
+    if @user.nil?
+      render json: { status: "failure", error: "couldn't find user" }
+    else
+      render json: { status: "success", data: @user.as_json(include: [:events, :channels]) }
+    end
   end
 
   # POST /users.json
@@ -49,7 +53,7 @@ class ApiUsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

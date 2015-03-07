@@ -5,13 +5,22 @@ class ApiChannelsController < ApplicationController
 
   # GET /channels.json
   def index
-    @channels = Event.find(params[:event_id]).channels
-    render json: { status: "success", data: @channels }
+    @event = Event.find_by_id(params[:event_id])
+    if @event.nil?
+      render json: { status: "failure", error: "couldn't find event" }
+    else
+      @channels = @event.channels
+      render json: { status: "success", data: @channels }
+    end
   end
 
   # GET /channels/1.json
   def show
-    render json: { status: "success", data: @channel }
+    if @channel.nil?
+      render json: { status: "failure", error: "couldn't find channel" }
+    else
+      render json: { status: "success", data: @channel }
+    end
   end
 
   # POST /channels.json
@@ -49,7 +58,7 @@ class ApiChannelsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_channel
-      @channel = Channel.find(params[:id])
+      @channel = Channel.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

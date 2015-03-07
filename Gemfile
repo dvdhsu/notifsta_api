@@ -6,6 +6,7 @@ gem 'mina' # deployment
 gem 'figaro', '1.0.0' # secrets
 gem 'sidekiq' # send notifications in the background
 gem 'parse-ruby-client' # send pushes with parse
+gem 'roost' # send pushes with roost
 
 # Standard Rails gems
 gem 'rails', '4.2.0'

@@ -152,6 +152,7 @@ GEM
       redis (~> 3.0, >= 3.0.4)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    roost (0.0.2)
     sass (3.4.13)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -219,6 +220,7 @@ DEPENDENCIES
   parse-ruby-client
   pg
   rails (= 4.2.0)
+  roost
   sass-rails (= 5.0.1)
   sidekiq
   simple_token_authentication (~> 1.0)

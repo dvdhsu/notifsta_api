@@ -16,13 +16,17 @@ class ApiMessagesController < ApplicationController
 
   # POST /messages.json
   def create
-    @channel = Channel.find(params[:channel_id])
-    @message = @channel.messages.new(message_params)
-
-    if @message.save
-      render json: { status: "success", data: @message }
+    @channel = Channel.find_by_id(params[:channel_id])
+    if @channel.nil?
+      render json: { status: "failure", error: "couldn't find channel" }
     else
-      render json: { status: "failure", data: @message.errors }
+      @message = @channel.messages.new(message_params)
+
+      if @message.save
+        render json: { status: "success", data: @message }
+      else
+        render json: { status: "failure", data: @message.errors }
+      end
     end
   end
 

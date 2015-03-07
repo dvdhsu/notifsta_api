@@ -4,6 +4,7 @@ ruby '2.2.0'
 gem 'simple_token_authentication', '~> 1.0' # REST API authentication
 gem 'mina' # deployment
 gem 'figaro', '1.0.0' # secrets
+gem 'parse-ruby-client' # send pushes with parse
 
 # Standard Rails gems
 gem 'rails', '4.2.0'

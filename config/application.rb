@@ -23,6 +23,9 @@ module NotifstaWebapp
     # turn off warnings triggered by friendly_id
     I18n.enforce_available_locales = false
 
+    # load sidekiq workers
+    config.autoload_paths += %W(#{config.root}/app/workers)
+
     # Test framework
     config.generators.test_framework false
 

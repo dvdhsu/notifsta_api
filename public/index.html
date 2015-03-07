@@ -27,7 +27,7 @@
           return(
             <div className="message">
               <p>{this.props.message_guts}</p>
-              <p>{moment(this.props.message_time).fromNow()}</p>
+              <p>{moment(this.props.message_time).fromNow()} ago</p>
             </div>
           )
         }

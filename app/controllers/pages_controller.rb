@@ -1,12 +1,12 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!, only: [
-    :inside
+    :webclient
   ]
 
   def home
   end
 
-  def inside
+  def webclient
   end
   
   

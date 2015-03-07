@@ -1,5 +1,5 @@
 NotifstaWebapp::Application.routes.draw do
-  get "inside", to: "pages#inside", as: "inside"
+  get "webclient", to: "pages#webclient", as: "webclient"
   get "home", to: "pages#home", as: "home"
 
   scope 'api' do

@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/reactjs/react-rails.git
+  revision: 901c8f68445df849642394cdf9859d293dc13f04
+  specs:
+    react-rails (1.0.0.pre)
+      coffee-script-source (~> 1.9)
+      connection_pool
+      execjs
+      rails (>= 3.1)
+      react-source (~> 0.12)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -117,6 +128,8 @@ GEM
       rake
     mini_portile (0.6.2)
     minitest (5.5.1)
+    momentjs-rails (2.9.0)
+      railties (>= 3.1)
     multi_json (1.11.0)
     multipart-post (2.0.0)
     nokogiri (1.6.6.2)
@@ -155,6 +168,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    react-source (0.12.2)
     redis (3.2.1)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
@@ -243,9 +257,11 @@ DEPENDENCIES
   jquery-rails (= 4.0.3)
   kaminari (= 0.16.2)
   mina
+  momentjs-rails
   parse-ruby-client
   pg
   rails (= 4.2.0)
+  react-rails (~> 1.0.0.pre)!
   roost
   sass-rails (= 5.0.1)
   sidekiq

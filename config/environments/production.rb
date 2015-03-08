@@ -92,4 +92,9 @@ NotifstaWebapp::Application.configure do
     user_name: ENV["SMTP_USER"],
     password: ENV["SMTP_PWD"]
   }
+
+  # use React production version
+  NotifstaWebapp::Application.configure do
+    config.react.variant = :production
+  end
 end

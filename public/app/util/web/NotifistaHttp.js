@@ -12,6 +12,7 @@
         return 'user_email=' + credentials.email + '&user_token=' + credentials.key;
     }
 
+
     function service($http){
         function GetEvent(id) {
             console.log(GetAuth());

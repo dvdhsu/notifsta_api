@@ -79,7 +79,6 @@
                         msg.time = moment(msg.created_at).fromNow();
                         return msg;
                     });
-                    channel.messages.reverse();
                 });
                 promise.error(function(error){
                     channel.messages = [

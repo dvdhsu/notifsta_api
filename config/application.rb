@@ -38,5 +38,13 @@ module NotifstaWebapp
       'Access-Control-Allow-Origin' => '*',
       'Access-Control-Request-Method' => '*'
     })
+
+    # disable rack lock for websockets
+    config.middleware.delete Rack::Lock
+
+    # React options
+    config.react.jsx_transform_options = {
+      harmony: true
+    }
   end
 end

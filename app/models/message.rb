@@ -6,6 +6,7 @@ class Message < ActiveRecord::Base
 
   after_commit :parse_push_notify
   after_commit :roost_push_notify
+  after_commit :websocket_notify
 
   private
     def parse_push_notify
@@ -14,6 +15,10 @@ class Message < ActiveRecord::Base
 
     def roost_push_notify
       RoostPushWorker.perform_async self.id
+    end
+
+    def websocket_notify
+      WebsocketWorker.perform_async self.id
     end
 
 end

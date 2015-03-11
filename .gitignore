@@ -28,4 +28,7 @@ doc/
 # Ignore application configuration
 /config/application.yml
 .secret
+<<<<<<< HEAD
 
+=======
+>>>>>>> 232227094a28f8c4dd35e779079fffe709fccfd8

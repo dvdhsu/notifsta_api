@@ -19,4 +19,5 @@
 //= require bootstrap 
 //= require analytics
 //= require common
+//= require websocket_rails/main
 //= require moment

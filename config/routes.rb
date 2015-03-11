@@ -1,6 +1,7 @@
 NotifstaWebapp::Application.routes.draw do
   get "webclient2", to: "pages#webclient", as: "webclient"
   get "home", to: "pages#home", as: "home"
+  get "event_admin", to: "pages#event_admin", as: "event_admin"
 
   scope 'api' do
     scope 'v1' do

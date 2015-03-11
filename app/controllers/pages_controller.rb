@@ -6,6 +6,9 @@ class PagesController < ApplicationController
   def home
   end
 
+  def event_admin
+  end
+
   def webclient
     event = current_user.events.first
     channel_array = event.channels.as_json(include: {

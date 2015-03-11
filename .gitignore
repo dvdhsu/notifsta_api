@@ -28,3 +28,5 @@ doc/
 # Ignore application configuration
 /config/application.yml
 .secret
+
+bower_components

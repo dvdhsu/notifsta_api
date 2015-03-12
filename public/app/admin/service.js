@@ -72,14 +72,15 @@
             //});
             //
             
-            event.total_broadcasts = 0;
+            var total_broadcasts = 0;
+            total_broadcasts = 0;
             event.channels.map(function(channel){
                 var promise = NotifistaHttp.GetMessages(channel.id);
                 promise.success(function(e){
                     var messages = e.data;
                     channel.messages = messages.map(function(msg){
                         msg.time = moment(msg.created_at).fromNow();
-                        event.total_broadcasts += 1;
+                        total_broadcasts += 1;
                         return msg;
                     });
                 });
@@ -92,7 +93,7 @@
                     ]
                 })
             });
-
+            event.total_broadcasts = total_broadcasts;
         }
 
         var promise = ParseHttp.GetData();

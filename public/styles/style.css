@@ -6,6 +6,12 @@ textarea:focus, input:focus{
     outline: 0;
 }
 
+
+
+.new-notice-form {
+    display: inline;
+}
+
 .tags {
 	background: none !important;
 	border: none !important;
@@ -171,6 +177,7 @@ body {
 .stat-icon .icon {
 	width: 25px;
 	margin-top: 18px;
+	display: inline;
 }
 
 .stat-text {
@@ -180,7 +187,6 @@ body {
 	margin: 0 auto;
 	-webkit-font-smoothing: antialiased;
 	padding-top: 10px;
-	margin-left: -30px;
 }
 
 .stat-number {

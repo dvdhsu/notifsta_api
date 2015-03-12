@@ -62,7 +62,7 @@
 
     <div class="row newnotice">
 
-      <form ng-submit="broadcast_notice()">
+      <form ng-submit="broadcast_notice()" class="new-notice-form">
 
         <input class="newnoticeinput" type="text" placeholder="Write a new notice..." ng-model="input.message" ng-show="!step2" ng-disabled="selected_none() || loading">
         <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>

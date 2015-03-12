@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!, only: [
-    :webclient
+    :webclient,
+    :event_admin
   ]
 
   def home

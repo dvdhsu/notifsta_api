@@ -1,7 +1,6 @@
 (function(){
     angular.module('notifista.services').service('NotifistaHttp', ['$http', service]);
-    var BASE_URL = 'http://localhost:3000';
-    //var BASE_URL = 'http://notifsta.com';
+    var BASE_URL = 'http://notifsta.com';
     //var BASE_URL = '';
     var credentials = {
         email: null,

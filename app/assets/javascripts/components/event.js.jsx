@@ -50,8 +50,10 @@ var Event = React.createClass({
       console.log("received one");
       this.setState({channels_data: state});
       if ("Notification" in window) {
-        // bind a better function
-        var notification = new Notification(m.message.message_guts);
+        var opts = {
+          icon: 'http://notifsta.com/icon.png'
+        }
+        var notification = new Notification(m.message.message_guts, opts);
       }
     }.bind(this));
   },

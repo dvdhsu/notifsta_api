@@ -1,7 +1,7 @@
 (function(){
     angular.module('notifista.services').service('NotifistaHttp', ['$http', service]);
-    //var BASE_URL = 'http://localhost:1337';
-    var BASE_URL = 'http://notifsta.com';
+    var BASE_URL = 'http://localhost:3000';
+    //var BASE_URL = 'http://notifsta.com';
     //var BASE_URL = '';
     var credentials = {
         email: null,
@@ -37,6 +37,7 @@
         function Login(email, password){
             credentials.email = email;
             credentials.password = password
+            console.log(credentials);
             var promise = $http.get(BASE_URL + '/api/v1/auth/login?email='+ email + '&password='+ password);
             promise.success(function(e){
                 if (e.data){
@@ -44,6 +45,12 @@
                 }
             })
             return promise;
+        }
+
+        function GetUser(user_id){
+          var promise = $http.get(BASE_URL + '/api/v1/users/' + user_id );
+          return promise;
+
         }
 
         /* OBSOLETED CODE */
@@ -85,6 +92,7 @@
             GetEvent: GetEvent,
             Broadcast: Broadcast,
             GetMessages: GetMessages,
+            GetUser: GetUser,
             credentials: credentials
         }
     }

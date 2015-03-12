@@ -6,7 +6,7 @@
     ['$scope', 'NotifistaHttp', 'EventService', '$cookies', '$timeout', function($scope, NotifistaHttp, EventService, $cookies, $timeout) {
         //TESTING PURPOSES ONLY
         //var p = NotifistaHttp.LoginEvent('event1', 'asdfasdf');
-        EventService.SetState('oi@notifsta.com', 'oi', $scope.event.name);
+        EventService.SetState($scope.user_id, $scope.event.name);
 
         var TIMEOUT = 1 * 1000;
 

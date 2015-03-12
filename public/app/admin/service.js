@@ -39,13 +39,15 @@
 
         }
 
-        function SetState(email, password, event_name){
-            Login(email, password, function(){SetEvent(event_name)})
+        function SetState(user_id, event_name){
+            GetUser(user_id, function(){SetEvent(event_name)})
         }
 
-        function Login(email, password, callback){
-            var p = NotifistaHttp.Login(email, password);
+        function GetUser(user_id, callback){
+            var p = NotifistaHttp.GetUser(user_id);
             p.success(function(e){
+              console.log("GOT USER");
+              console.log(e);
                 _data.User = e.data;
                 console.log(e);
                 if (callback){
@@ -105,14 +107,12 @@
 
 
         return {
+          SetEvent: SetEvent,
             //Used to set the event we would like to have info about
             SetState: SetState,
 
             //Used to get updated information about the event
             UpdateEvent: UpdateEvent,
-
-            Login: Login,
-
 
             //for data binding purposes
             data : _data

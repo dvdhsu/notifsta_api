@@ -41,9 +41,11 @@
   </head>
   <body>
     <div ng-app="notifista" class="container-fluid">
-      <div ng-controller="MainController"
+      <div ng-controller="MainController" id="main_controller"
         data-auth-email=<%= current_user.email %>
-        data-auth-token=<%= current_user.authentication_token%>>
+        data-auth-token=<%= current_user.authentication_token%>
+        data-user-id=<%= current_user.id%>
+        data-event-name=<%= current_user.events.first.name %> >
 
         <div ng-controller="AdminPanelController" ng-include src="'/app/admin/main.html'"></div>
         <!--<div ng-controller="UserPanelController" ng-include src="'/app/user/main.html'"></div>-->

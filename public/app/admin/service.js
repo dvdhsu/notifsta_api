@@ -73,7 +73,6 @@
             //
             
             var total_broadcasts = 0;
-            total_broadcasts = 0;
             event.channels.map(function(channel){
                 var promise = NotifistaHttp.GetMessages(channel.id);
                 promise.success(function(e){
@@ -83,6 +82,7 @@
                         total_broadcasts += 1;
                         return msg;
                     });
+                    event.total_broadcasts = total_broadcasts;
                 });
                 promise.error(function(error){
                     channel.messages = [
@@ -93,7 +93,6 @@
                     ]
                 })
             });
-            event.total_broadcasts = total_broadcasts;
         }
 
         var promise = ParseHttp.GetData();

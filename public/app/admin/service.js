@@ -20,8 +20,6 @@
         }
         var _websocket_enabled = false;
         
-
-
         function SetEvent(event_name){
             console.log(_data);
             for (var i = 0 ; i != _data.User.events.length; ++i){
@@ -72,13 +70,16 @@
             //promise.success(function(e){
                 //console.log(e);
             //});
-
+            //
+            
+            event.total_broadcasts = 0;
             event.channels.map(function(channel){
                 var promise = NotifistaHttp.GetMessages(channel.id);
                 promise.success(function(e){
                     var messages = e.data;
                     channel.messages = messages.map(function(msg){
                         msg.time = moment(msg.created_at).fromNow();
+                        event.total_broadcasts += 1;
                         return msg;
                     });
                 });

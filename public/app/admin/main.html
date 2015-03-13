@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="app/admin/admin.css" media="screen">
 <!--<div ng-controller="EventLoginController" ng-include src="'/app/event_login/main.html'"></div>-->
 
 <!--<div ng-show="!logged_in()">-->
@@ -52,9 +52,22 @@
 <!--</div>-->
 <div class="row content" >
 
-  <div class="col-md-2">
+  <div class="col-md-2 sidepanel">
 
     <div ng-controller="CreateChannel" ng-include src="'/app/create_channel/main.html'"></div>
+
+            <label class="select" ng-show="!info" style="margin-top:5px; margin-left: 10px;">
+
+          <span class="helper" ng-show = "selected_none()">
+            Select a channel to start broadcasting!
+          </span>
+                            <span class="helper" ng-show = "!selected_none()">
+            Posting to 
+            <span ng-repeat = "channel in data.Event.channels" ng-show="channel.selected">
+              #{{ channel.name }}
+            </span>
+          </span>
+        </label>
 
   </div>
 
@@ -66,20 +79,10 @@
 
         <input class="newnoticeinput" type="text" placeholder="Write a new notice..." ng-model="input.message" ng-show="!step2" ng-disabled="selected_none() || loading">
         <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
-        <label ng-show="!info" style="margin-top:5px; margin-left: 10px;">
-          <span ng-show = "!selected_none()">
-            Posting to 
-            <span ng-repeat = "channel in data.Event.channels" ng-show="channel.selected">
-              #{{ channel.name }}
-            </span>
-          </span>
-          <span ng-show = "selected_none()">
-            Select one more channels on the left to start broadcasting notices!
-          </span>
-        </label>
         <label ng-show="info" style="margin-top:5px; margin-left: 10px">
           {{ info }}
         </label>
+
       </form>
 
     </div>

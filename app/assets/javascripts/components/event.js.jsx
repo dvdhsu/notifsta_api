@@ -15,7 +15,7 @@ var Channel = React.createClass({
       m => <Message guts={m.message_guts} time={m.created_at}/>
     )
     return (
-      <div className="messages">
+      <div className="messages col-md-4">
         <div className="channelHeader">
           <h2> {this.props.channel_data.name} </h2>
         </div>

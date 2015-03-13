@@ -1,5 +1,6 @@
 NotifstaWebapp::Application.routes.draw do
   root to: 'pages#home'
+  get "webclient", to: "pages#webclient", as: "webclient"
   get "home", to: "pages#home", as: "home"
   get "event_admin", to: "pages#event_admin", as: "event_admin"
 

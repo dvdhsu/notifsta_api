@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150306020207) do
+ActiveRecord::Schema.define(version: 20150306020158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,13 +24,6 @@ ActiveRecord::Schema.define(version: 20150306020207) do
   end
 
   add_index "channels", ["event_id"], name: "index_channels_on_event_id", using: :btree
-
-  create_table "channels_users", force: :cascade do |t|
-    t.integer "channel_id"
-    t.integer "user_id"
-  end
-
-  add_index "channels_users", ["channel_id", "user_id"], name: "index_channels_users_on_channel_id_and_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "name"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150306020158) do
+ActiveRecord::Schema.define(version: 20150318191627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 20150306020158) do
 
   add_index "messages", ["channel_id"], name: "index_messages_on_channel_id", using: :btree
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.boolean  "admin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "subscriptions", ["event_id"], name: "index_subscriptions_on_event_id", using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -92,4 +103,6 @@ ActiveRecord::Schema.define(version: 20150306020158) do
 
   add_foreign_key "channels", "events"
   add_foreign_key "messages", "channels"
+  add_foreign_key "subscriptions", "events"
+  add_foreign_key "subscriptions", "users"
 end

@@ -4,10 +4,13 @@ class ApiUsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users.json
+=begin
   def index
     @users = User.all
+    puts current_user.email
     render json: { status: "success", data: @users }
   end
+=end
 
   # GET /users/1.json
   def show

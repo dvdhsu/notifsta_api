@@ -15,7 +15,7 @@ class ApiUsersController < ApplicationController
   # GET /users/1.json
   def show
     if @user.id != current_user.id
-      render json: { status: "failure", error: "Not found, or unauthorized." }
+      render json: { status: "failure", error: "User not found, or unauthorized." }
     else
       render json: { status: "success", data: @user.as_json(include: { events: { include: :channels } }) }
     end

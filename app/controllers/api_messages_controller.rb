@@ -6,8 +6,9 @@ class ApiMessagesController < ApplicationController
   # GET /messages.json
   def index
     @channel = Channel.find_by_id(params[:channel_id])
-    if @channel.nil?
-      render json: { status: "failure", error: "couldn't find channel" }
+    # if the current user doesn't have the event...
+    if @channel.nil? || current_user.events.find_by_id(@channel.event.id).nil?
+      render json: { status: "failure", error: "Channel not found, or unauthorized." }
     else
       @messages = @channel.messages
       render json: { status: "success", data: @messages }
@@ -16,8 +17,8 @@ class ApiMessagesController < ApplicationController
 
   # GET /messages/1.json
   def show
-    if @message.nil?
-      render json: { status: "failure", error: "couldn't find message" }
+    if @message.nil? || current_user.events.find_by_id(@message.channel.event.id).nil?
+      render json: { status: "failure", error: "Message not found, or unauthorized." }
     else
       render json: { status: "success", data: @message }
     end
@@ -26,8 +27,16 @@ class ApiMessagesController < ApplicationController
   # POST /messages.json
   def create
     @channel = Channel.find_by_id(params[:channel_id])
-    if @channel.nil?
-      render json: { status: "failure", error: "couldn't find channel" }
+
+    # hacky way of assigning subscription, since if channel is nil, then
+    # @channel.event fails
+    subscription = @channel.nil? ? nil :
+      current_user.subscriptions.where(event_id: @channel.event.id).first
+
+    # either the channel doesn't exist, the user isn't subscribed to the event,
+    # or the user isn't an admin on the event
+    if @channel.nil? || subscription.nil? ||(not subscription.admin)
+      render json: { status: "failure", error: "Channel not found, or unauthorized." }
     else
       @message = @channel.messages.new(message_params)
 

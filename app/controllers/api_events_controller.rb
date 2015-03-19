@@ -11,8 +11,10 @@ class ApiEventsController < ApplicationController
 
   # GET /events/1.json
   def show
-    if @event.nil?
-      render json: { status: "failure", error: "couldn't find event" }
+    # ensure that the current user has access to the event
+    # namely, that he / she is subscribed to it
+    if @event.nil? || current_user.events.find_by_id(@event.id).nil?
+      render json: { status: "failure", error: "Event not found, or unauthorized." }
     else
       render json: { status: "success", data: @event.as_json(include: :channels) }
     end

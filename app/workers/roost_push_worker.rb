@@ -2,10 +2,10 @@
 class RoostPushWorker
   include Sidekiq::Worker
 
-  def perform(message_id)
-    @message = Message.find(message_id)
+  def perform(notification_id)
+    @notification = Notification.find(notification_id)
     data = {
-      alert: @message.message_guts,
+      alert: @notification.notification_guts,
       url: "http://notifsta.com/webclient"
     }
     puts "Sending Roost push notification..."

@@ -53,14 +53,15 @@ ActiveRecord::Schema.define(version: 20150318191627) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
-  create_table "messages", force: :cascade do |t|
-    t.string   "message_guts"
+  create_table "notifications", force: :cascade do |t|
+    t.string   "notification_guts"
+    t.string   "type"
     t.integer  "channel_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
-  add_index "messages", ["channel_id"], name: "index_messages_on_channel_id", using: :btree
+  add_index "notifications", ["channel_id"], name: "index_notifications_on_channel_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "event_id"
@@ -102,7 +103,7 @@ ActiveRecord::Schema.define(version: 20150318191627) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "channels", "events"
-  add_foreign_key "messages", "channels"
+  add_foreign_key "notifications", "channels"
   add_foreign_key "subscriptions", "events"
   add_foreign_key "subscriptions", "users"
 end

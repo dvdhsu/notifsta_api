@@ -26,6 +26,9 @@ module NotifstaWebapp
     # load sidekiq workers
     config.autoload_paths += %W(#{config.root}/app/workers)
 
+    # load Notifications through inheritance (messages and surveys)
+    config.autoload_paths += %W(#{config.root}/app/models/notifications)
+
     # Test framework
     config.generators.test_framework false
 
@@ -46,5 +49,8 @@ module NotifstaWebapp
     config.react.jsx_transform_options = {
       harmony: true
     }
+
+    # opt in to errors in callbacks
+   config.active_record.raise_in_transactional_callbacks = true
   end
 end

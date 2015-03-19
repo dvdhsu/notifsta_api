@@ -14,13 +14,13 @@ NotifstaWebapp::Application.routes.draw do
       resources :users, only: [:show], controller: :api_users
       resources :events, only: [:show], controller: :api_events do
         resources :channels, only: [:index], controller: :api_channels do
-          resources :messages, only: [:index, :create], controller: :api_messages
+          resources :notifications, only: [:index, :create], controller: :api_notifications
         end
       end
       resources :channels, only: [:show], controller: :api_channels do
-        resources :messages, only: [:index, :create], controller: :api_messages
+        resources :notifications, only: [:index, :create], controller: :api_notifications
       end
-      resources :messages, only: [:show], controller: :api_messages
+      resources :notifications, only: [:show], controller: :api_notifications
     end
   end
   

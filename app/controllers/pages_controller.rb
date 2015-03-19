@@ -14,8 +14,8 @@ class PagesController < ApplicationController
   def webclient
     event = current_user.events.first
     channel_array = event.channels.as_json(include: {
-      messages: {
-        only: [:message_guts, :created_at]
+      notifications: {
+        only: [:notification_guts, :created_at]
       }
     },
     only: [:name, :id])

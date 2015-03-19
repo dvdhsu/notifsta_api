@@ -2,17 +2,17 @@
 class WebsocketWorker
   include Sidekiq::Worker
 
-  def perform(message_id)
-    @message = Message.find(message_id)
+  def perform(notification_id)
+    @notification = Notification.find(notification_id)
     data = {
-      message: {
-        message_guts: @message.message_guts,
-        created_at: @message.created_at
+      notification: {
+        notification_guts: @notification.notification_guts,
+        created_at: @notification.created_at
       },
-      channel_id: @message.channel.id
+      channel_id: @notification.channel.id
     }
-    puts "messages_#{@message.channel.event.name}"
-    WebsocketRails["messages_#{@message.channel.event.name}".to_sym].trigger 'new', data
+    puts "notifications_#{@notification.channel.event.name}"
+    WebsocketRails["notifications_#{@notification.channel.event.name}".to_sym].trigger 'new', data
   end
 
 end

@@ -35,14 +35,14 @@ gen_channel.save!
 food_channel.save!
 logistics_channel.save!
 
-gen_channel.messages.create!(message_guts: "first message in general!")
-gen_channel.messages.create!(message_guts: "second message in general!")
-gen_channel.messages.create!(message_guts: "third message in general!")
+gen_channel.notifications.create!(type: "Message", notification_guts: "first notification in general!")
+gen_channel.notifications.create!(type: "Message", notification_guts: "second notification in general!")
+gen_channel.notifications.create!(type: "Message", notification_guts: "third notification in general!")
 
-food_channel.messages.create!(message_guts: "first message in food!")
-food_channel.messages.create!(message_guts: "second message in food!")
-food_channel.messages.create!(message_guts: "third message in food!")
+food_channel.notifications.create!(type: "Message", notification_guts: "first notification in food!")
+food_channel.notifications.create!(type: "Message", notification_guts: "second notification in food!")
+food_channel.notifications.create!(type: "Message", notification_guts: "third notification in food!")
 
-logistics_channel.messages.create!(message_guts: "first message in logistics!")
-logistics_channel.messages.create!(message_guts: "second message in logistics!")
-logistics_channel.messages.create!(message_guts: "third message in logistics!")
+logistics_channel.notifications.create!(type: "Message", notification_guts: "first notification in logistics!")
+logistics_channel.notifications.create!(type: "Message", notification_guts: "second notification in logistics!")
+logistics_channel.notifications.create!(type: "Message", notification_guts: "third notification in logistics!")

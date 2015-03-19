@@ -1,7 +1,8 @@
-class Message < ActiveRecord::Base
+class Notification < ActiveRecord::Base
   belongs_to :channel
 
-  validates :message_guts, presence: true
+  validates :notification_guts, presence: true
+  validates :type, presence: true
   validates :channel, presence: true
 
   after_commit :parse_push_notify
@@ -20,5 +21,4 @@ class Message < ActiveRecord::Base
     def websocket_notify
       WebsocketWorker.perform_async self.id
     end
-
 end

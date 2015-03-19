@@ -7,7 +7,7 @@ gem 'figaro', '1.0.0' # secrets
 gem 'sidekiq' # send notifications in the background
 gem 'parse-ruby-client' # send pushes with parse
 gem 'roost' # send pushes with roost
-gem 'websocket-rails' # send new messages directly to webapp
+gem 'websocket-rails' # send new notifications directly to webapp
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'momentjs-rails'
 

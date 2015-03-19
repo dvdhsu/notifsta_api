@@ -3,18 +3,18 @@ class ParsePushWorker
   include Sidekiq::Worker
   require 'parse-ruby-client' 
 
-  def perform(message_id)
+  def perform(notification_id)
     Parse.init(application_id: ENV["PARSE_APPLICATION_ID"], api_key: ENV["PARSE_REST_API_KEY"], quiet: false)
-    @message = Message.find(message_id)
+    @notification = Notification.find(notification_id)
     data = {
-      alert: @message.message_guts ,
+      alert: @notification.notification_guts ,
       # TODO: this needs to be changed to event.id
-      event: @message.channel.event.name,
+      event: @notification.channel.event.name,
       # TODO: this needs to be changed to channel.id
-      channel: @message.channel.name
+      channel: @notification.channel.name
     }
     # TODO: this needs to be changed to channel.id
-    push = Parse::Push.new(data, @message.channel.name)
+    push = Parse::Push.new(data, @notification.channel.name)
     puts "Sending Parse push notification..."
     push.save
   end

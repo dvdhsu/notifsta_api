@@ -4,10 +4,13 @@ class ApiEventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events.json
+  # maybe allow for site admins later on?
+=begin
   def index
     @events = Event.all
     render json: { status: "success", data: @events }
   end
+=end
 
   # GET /events/1.json
   def show

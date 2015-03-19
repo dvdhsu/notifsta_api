@@ -6,8 +6,9 @@ class ApiChannelsController < ApplicationController
   # GET /channels.json
   def index
     @event = Event.find_by_id(params[:event_id])
-    if @event.nil?
-      render json: { status: "failure", error: "couldn't find event" }
+    # if the user doesn't have the event...
+    if @event.nil? || current_user.events.find_by_id(@event.id).nil?
+      render json: { status: "failure", error: "Event not found, or unauthorized." }
     else
       @channels = @event.channels
       render json: { status: "success", data: @channels }
@@ -16,8 +17,8 @@ class ApiChannelsController < ApplicationController
 
   # GET /channels/1.json
   def show
-    if @channel.nil?
-      render json: { status: "failure", error: "couldn't find channel" }
+    if @channel.nil? || current_user.events.find_by_id(@channel.event.id).nil?
+      render json: { status: "failure", error: "Channel not found, or unauthorized." }
     else
       render json: { status: "success", data: @channel }
     end

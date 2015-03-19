@@ -23,7 +23,7 @@ class ApiAuthenticationController < ApplicationController
       render json: { status: "failure" }
     end
   end
-  
+
   def get_authentication_token
     render json: { status: "success", data: { authentication_token: current_user.authentication_token } }
   end

@@ -3,11 +3,6 @@ class ApiNotificationsController < ApplicationController
 
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
 
-  # since `type' isn't returned, we have to include it with an `only' when we
-  # convert to JSON. Annoying, but there are no better workarounds.
-  # https://github.com/rails/rails/issues/3508
-  @@fields = [:channel_id, :id, :notification_guts, :created_at, :updated_at, :type]
-
   # GET /notifications.json
   def index
     @channel = Channel.find_by_id(params[:channel_id])
@@ -16,7 +11,7 @@ class ApiNotificationsController < ApplicationController
       render json: { status: "failure", error: "Channel not found, or unauthorized." }
     else
       @notifications = @channel.notifications
-      render json: { status: "success", data: @notifications.as_json(only: @@fields) }
+      render json: { status: "success", data: @notifications.as_json }
     end
   end
 
@@ -25,7 +20,7 @@ class ApiNotificationsController < ApplicationController
     if @notification.nil? || current_user.events.find_by_id(@notification.channel.event.id).nil?
       render json: { status: "failure", error: "Notification not found, or unauthorized." }
     else
-      render json: { status: "success", data: @notification.as_json(only: @@fields) }
+      render json: { status: "success", data: @notification.as_json }
     end
   end
 
@@ -46,7 +41,7 @@ class ApiNotificationsController < ApplicationController
       begin
         @notification = @channel.notifications.new(notification_params)
         if @notification.save
-          render json: { status: "success", data: @notification.as_json(only: @@fields) }
+          render json: { status: "success", data: @notification.as_json }
         else
           render json: { status: "failure", data: @notification.errors }
         end

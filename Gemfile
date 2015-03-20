@@ -10,6 +10,8 @@ gem 'roost' # send pushes with roost
 gem 'websocket-rails' # send new notifications directly to webapp
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'momentjs-rails'
+gem 'rabl'
+gem 'oj'
 
 # Standard Rails gems
 gem 'rails', '4.2.0'

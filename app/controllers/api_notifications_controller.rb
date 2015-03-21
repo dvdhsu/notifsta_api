@@ -41,7 +41,23 @@ class ApiNotificationsController < ApplicationController
       begin
         @notification = @channel.notifications.new(notification_params)
         if @notification.save
-          render json: { status: "success", data: @notification.as_json }
+          if @notification.is_a?(Survey)
+            # if there are no options, or if it isn't an array...
+            if option_params.empty? || (not option_params.is_a?(Array))
+              render json: { status: "failure", data: "Cannot create survey without options." }
+              return
+            end
+            for option in option_params
+              begin
+                @notification.options.create!(option_guts: option.to_s)
+              rescue ActiveRecord::RecordInvalid
+                render json: { status: "failure", data: "One of the options failed validation." }
+                @notification.destroy!
+                return
+              end
+            end
+          end
+          render "notifications/show"
         else
           render json: { status: "failure", data: @notification.errors }
         end
@@ -82,4 +98,7 @@ class ApiNotificationsController < ApplicationController
       params.require(:notification).permit(:notification_guts, :type)
     end
 
+    def option_params
+      params.require(:options)
+    end
 end

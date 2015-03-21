@@ -12,6 +12,6 @@ node(:response, if: locals[:is_survey]) do |survey|
   response = survey.responses.where(user_id: current_user.id).first rescue nil
   # if they've responded...
   if (not response.nil?)
-    partial("response/response", object: response)
+    partial("responses/response", object: response)
   end
 end

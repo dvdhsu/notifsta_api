@@ -11,7 +11,7 @@ class ApiNotificationsController < ApplicationController
       render json: { status: "failure", error: "Channel not found, or unauthorized." }
     else
       @notifications = @channel.notifications
-      render json: { status: "success", data: @notifications.as_json }
+      render "notifications/index"
     end
   end
 
@@ -20,7 +20,7 @@ class ApiNotificationsController < ApplicationController
     if @notification.nil? || current_user.events.find_by_id(@notification.channel.event.id).nil?
       render json: { status: "failure", error: "Notification not found, or unauthorized." }
     else
-      render json: { status: "success", data: @notification.as_json }
+      render "notifications/show"
     end
   end
 

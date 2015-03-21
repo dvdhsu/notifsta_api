@@ -5,7 +5,8 @@ class ApiResponsesController < ApplicationController
 
   def index
     @survey = Survey.find_by_id(params[:notification_id])
-    sub = current_user.subscriptions.where(event_id: @survey.channel.event.id).first
+    # hacky way of setting sub again...
+    sub = @survey.nil? ? nil : current_user.subscriptions.where(event_id: @survey.channel.event.id).first
 
     # if the Survey isn't found, the sub doesn't exist, or the user isn't
     # admin (user must be admin to list all responses)...

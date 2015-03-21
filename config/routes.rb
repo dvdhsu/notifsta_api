@@ -20,7 +20,10 @@ NotifstaWebapp::Application.routes.draw do
       resources :channels, only: [:show], controller: :api_channels do
         resources :notifications, only: [:index, :create], controller: :api_notifications
       end
-      resources :notifications, only: [:show], controller: :api_notifications
+      resources :notifications, only: [:show], controller: :api_notifications do
+        resources :responses, only: [:index, :show, :create], controller: :api_responses
+      end
+      resources :responses, only: [:show], controller: :api_responses
     end
   end
   

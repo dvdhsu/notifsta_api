@@ -1,7 +1,7 @@
 # API documentation
 
 ## Summary
-* All API calls are made to notifsta.com/api/v1. Prefix this to all URLs below.
+* All API calls are made to api.notifsta.com/v1. Prefix this to all URLs below.
 * All API calls return a "status" and a "data". If successful, "status" will
 always be "success"; if not, always "failure". "data" contains the response.
 
@@ -11,7 +11,7 @@ always be "success"; if not, always "failure". "data" contains the response.
 * Expects email and password.
 * Responds with User, including Events, and Channels.
 
-* Request: ```notifsta.com/api/v1/auth/login/?email=admin@example.com&password=asdf```
+* Request: ```api.notifsta.com/v1/auth/login/?email=admin@example.com&password=asdf```
 
 * Response: 
 
@@ -73,15 +73,16 @@ always be "success"; if not, always "failure". "data" contains the response.
 
 ### show (/[id])
 * Returns a User, along with her Events and Channels. 
-* Reqest: ```notifsta.com/api/v1/users/1?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
+* Reqest: ```api.notifsta.com/v1/users/1?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
 * The same response as above.
 
 ## Events (/events)
 
 ### show (/[id])
 * Returns a Event, along with its Channels.
-* Request: ```notifsta.com/api/v1/events/1?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
+* Request: ```api.notifsta.com/v1/events/1?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
 * Response:
+
         {
             "status": "success",
             "data": {
@@ -114,12 +115,13 @@ always be "success"; if not, always "failure". "data" contains the response.
                 ]
             }
         }
-
+ 
 ### Channels (/channels)
 
 * Index channels for an Event.
-* Request: ```notifsta.com/api/v1/events/1/channels?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
+* Request: ```api.notifsta.com/v1/events/1/channels?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
 * Response:
+
         {
             "status": "success",
             "data": [
@@ -152,8 +154,9 @@ always be "success"; if not, always "failure". "data" contains the response.
 ### show (/[id])
 
 * Returns a Channel.
-* Request: ```notifsta.com/api/v1/channels/1/?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
+* Request: ```api.notifsta.com/v1/channels/1/?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
 * Response: 
+
         {
             "status": "success",
             "data": {
@@ -170,8 +173,9 @@ always be "success"; if not, always "failure". "data" contains the response.
 #### Index Notifications for a Channel.
 
 * Returns a list of Notifications.
-* Request: ```notifsta.com/api/v1/channels/1/notifications/?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
+* Request: ```api.notifsta.com/v1/channels/1/notifications/?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
 * Response: 
+
           {
               "status": "success",
               "data": [
@@ -223,11 +227,11 @@ always be "success"; if not, always "failure". "data" contains the response.
 * Requires a type, which is either "Message" or "Survey". Also requires a
 "notification_guts", which is the message.
 * If type is "Survey", then an "options" array is expected. This contains all
-the option_guts, which describe the option (e.g.
-```options[]=burger&options[]=pizza```.
+the option_guts, which describe the option (e.g. `options[]=burger&options[]=pizza`).
 
-* Request with Message: ```notifsta.com/api/v1/channels/1/notifications/?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv&notification[notification_guts]=Notifsta!&notification[type]=Message```
+* Request with Message: ```api.notifsta.com/v1/channels/1/notifications/?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv&notification[notification_guts]=Notifsta!&notification[type]=Message```
 * Response: 
+
         {
             "status": "success",
             "data": {
@@ -239,8 +243,9 @@ the option_guts, which describe the option (e.g.
             }
         }
 
-* Request with Survey: ```notifsta.com/api/v1/channels/1/notifications/?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv&notification[notification_guts]=What food?&notification[type]=Survey&options[]=burger&options[]=pizza``` 
+* Request with Survey: ```api.notifsta.com/v1/channels/1/notifications/?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv&notification[notification_guts]=What food?&notification[type]=Survey&options[]=burger&options[]=pizza``` 
 * Response:
+
         {
             "status": "success",
             "data": {
@@ -268,59 +273,67 @@ the option_guts, which describe the option (e.g.
 ## Notifications (/notifications)
 
 ### show (/[id])
-* Request: ```notifsta.com/api/v1/notifications/12?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
-* Response: ```{
-    "status": "success",
-    "data": {
-        "id": 12,
-        "channel_id": 1,
-        "notification_guts": "Notifsta!",
-        "type": "Message",
-        "created_at": "2015-03-21T07:54:17.008Z"
-    }
-}```
+* Request: ```api.notifsta.com/v1/notifications/12?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
+* Response: 
+
+        {
+            "status": "success",
+            "data": {
+                "id": 12,
+                "channel_id": 1,
+                "notification_guts": "Notifsta!",
+                "type": "Message",
+                "created_at": "2015-03-21T07:54:17.008Z"
+            }
+        }
 
 ### Response (/responses)
 
 #### Index (/)
 * Admins of the Event can list all responses to a particular Notification.
-* Request: ```notifsta.com/api/v1/notifications/11/responses?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
-* Response: ```{
-    "status": "success",
-    "data": [
+* Request: ```api.notifsta.com/v1/notifications/11/responses?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
+* Response: 
+
         {
-            "id": 1,
-            "option_id": 3,
-            "created_at": "2015-03-21T08:04:04.383Z",
-            "updated_at": "2015-03-21T08:04:04.383Z"
+            "status": "success",
+            "data": [
+                {
+                    "id": 1,
+                    "option_id": 3,
+                    "created_at": "2015-03-21T08:04:04.383Z",
+                    "updated_at": "2015-03-21T08:04:04.383Z"
+                }
+            ]
         }
-    ]
-} ```
 
 #### Show (/[id])
 * Show an individual response.
 * Can only be done if it's your response, or if you're an Event admin.
-* Request: ```notifsta.com/api/v1/notifications/11/responses/1?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
-* Response: ```{
-    "status": "success",
-    "data": {
-        "id": 1,
-        "option_id": 3,
-        "created_at": "2015-03-21T08:04:04.383Z",
-        "updated_at": "2015-03-21T08:04:04.383Z"
-    }
-}```
+* Request: ```api.notifsta.com/v1/notifications/11/responses/1?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
+* Response: 
+
+        {
+            "status": "success",
+            "data": {
+                "id": 1,
+                "option_id": 3,
+                "created_at": "2015-03-21T08:04:04.383Z",
+                "updated_at": "2015-03-21T08:04:04.383Z"
+            }
+        }
 
 #### Create (POST to /)
 * Responses can only be created by POSTing to the same URL as showing a Notification.  
 * If the user has a previous response, it is overridden.
-* Request: ```notifsta.com/api/v1/notifications/11/responses?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv&option_id=3```
-* Response: ```{
-    "status": "success",
-    "data": {
-        "id": 1,
-        "option_id": 3,
-        "created_at": "2015-03-21T08:04:04.383Z",
-        "updated_at": "2015-03-21T08:04:04.383Z"
-    }
-}```
+* Request: ```api.notifsta.com/v1/notifications/11/responses?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv&option_id=3```
+* Response: 
+
+        {
+            "status": "success",
+            "data": {
+                "id": 1,
+                "option_id": 3,
+                "created_at": "2015-03-21T08:04:04.383Z",
+                "updated_at": "2015-03-21T08:04:04.383Z"
+            }
+        }

@@ -176,52 +176,77 @@ always be "success"; if not, always "failure". "data" contains the response.
 * Request: ```api.notifsta.com/v1/channels/1/notifications/?user_email=admin@example.com&user_token=Q6VzX_oGdybdoZGjiLqv```
 * Response: 
 
-          {
-              "status": "success",
-              "data": [
-                  {
-                      "id": 11,
-                      "channel_id": 1,
-                      "notification_guts": "What food do you want?",
-                      "type": "Survey",
-                      "created_at": "2015-03-21T07:20:24.009Z",
-                      "options": [
-                          {
-                              "id": 3,
-                              "option_guts": "burgerzzzz",
-                              "created_at": "2015-03-21T07:20:24.020Z"
-                          },
-                          {
-                              "id": 4,
-                              "option_guts": "pizza",
-                              "created_at": "2015-03-21T07:20:24.027Z"
-                          }
-                      ],
-                      "response": null
-                  },
-                  {
-                      "id": 3,
-                      "channel_id": 1,
-                      "notification_guts": "third notification in general!",
-                      "type": "Message",
-                      "created_at": "2015-03-21T07:12:59.871Z"
-                  },
-                  {
-                      "id": 2,
-                      "channel_id": 1,
-                      "notification_guts": "second notification in general!",
-                      "type": "Message",
-                      "created_at": "2015-03-21T07:12:59.859Z"
-                  },
-                  {
-                      "id": 1,
-                      "channel_id": 1,
-                      "notification_guts": "first notification in general!",
-                      "type": "Message",
-                      "created_at": "2015-03-21T07:12:59.844Z"
-                  }
-              ]
-          }
+        {
+            "status": "success",
+            "data": [
+                {
+                    "id": 11,
+                    "channel_id": 1,
+                    "notification_guts": "What food do you want?",
+                    "type": "Survey",
+                    "created_at": "2015-03-21T07:20:24.009Z",
+                    "options": [
+                        {
+                            "id": 3,
+                            "option_guts": "burgerzzzz",
+                            "created_at": "2015-03-21T07:20:24.020Z"
+                        },
+                        {
+                            "id": 4,
+                            "option_guts": "pizza",
+                            "created_at": "2015-03-21T07:20:24.027Z"
+                        }
+                    ],
+                    "response": {
+                        "id": 6,
+                        "option_id": 4,
+                        "created_at": "2015-03-21T22:56:27.078Z",
+                        "updated_at": "2015-03-21T22:56:27.078Z"
+                    }
+                },
+                {
+                    "id": 10,
+                    "channel_id": 1,
+                    "notification_guts": "Hello J!",
+                    "type": "Survey",
+                    "created_at": "2015-03-21T07:20:03.913Z",
+                    "options": [
+                        {
+                            "id": 1,
+                            "option_guts": "burgerzzzz",
+                            "created_at": "2015-03-21T07:20:03.946Z"
+                        },
+                        {
+                            "id": 2,
+                            "option_guts": "pizza",
+                            "created_at": "2015-03-21T07:20:03.954Z"
+                        }
+                    ],
+                    "response": null
+                },
+                {
+                    "id": 3,
+                    "channel_id": 1,
+                    "notification_guts": "third notification in general!",
+                    "type": "Message",
+                    "created_at": "2015-03-21T07:12:59.871Z"
+                },
+                {
+                    "id": 2,
+                    "channel_id": 1,
+                    "notification_guts": "second notification in general!",
+                    "type": "Message",
+                    "created_at": "2015-03-21T07:12:59.859Z"
+                },
+                {
+                    "id": 1,
+                    "channel_id": 1,
+                    "notification_guts": "first notification in general!",
+                    "type": "Message",
+                    "created_at": "2015-03-21T07:12:59.844Z"
+                }
+            ]
+        }
 
 #### Create (POST to same URL as Index)
 * Requires a type, which is either "Message" or "Survey". Also requires a

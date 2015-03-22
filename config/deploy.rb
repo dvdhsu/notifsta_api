@@ -13,7 +13,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 set :rails_env, 'production'
 
 set :domain, 'notifsta.com'
-set :deploy_to, '/srv/notifsta_webapp'
+set :deploy_to, '/srv/notifsta_api'
 set :repository, 'https://github.com/dvdhsu/notifsta_webapp.git'
 set :branch, 'master'
 

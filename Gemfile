@@ -12,6 +12,7 @@ gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'momentjs-rails'
 gem 'rabl'
 gem 'oj'
+gem 'cancancan', '~> 1.10'
 
 # Standard Rails gems
 gem 'rails', '4.2.0'

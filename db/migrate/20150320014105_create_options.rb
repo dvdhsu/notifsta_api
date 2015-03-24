@@ -1,7 +1,7 @@
 class CreateOptions < ActiveRecord::Migration
   def change
     create_table :options do |t|
-      t.references :survey, index: true
+      t.references :notification, index: true
       t.string :option_guts
 
       t.timestamps null: false

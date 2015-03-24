@@ -9,5 +9,6 @@ class CreateSubscriptions < ActiveRecord::Migration
     end
     add_foreign_key :subscriptions, :events
     add_foreign_key :subscriptions, :users
+    add_index :subscriptions, [:user_id, :event_id], unique: true
   end
 end

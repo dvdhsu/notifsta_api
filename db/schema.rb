@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20150320034302) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "channels", ["event_id", "name"], name: "index_channels_on_event_id_and_name", unique: true, using: :btree
   add_index "channels", ["event_id"], name: "index_channels_on_event_id", using: :btree
 
   create_table "events", force: :cascade do |t|
@@ -30,15 +31,6 @@ ActiveRecord::Schema.define(version: 20150320034302) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "events", ["name"], name: "index_events_on_name", using: :btree
-
-  create_table "events_users", force: :cascade do |t|
-    t.integer "event_id"
-    t.integer "user_id"
-  end
-
-  add_index "events_users", ["event_id", "user_id"], name: "index_events_users_on_event_id_and_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -85,12 +77,13 @@ ActiveRecord::Schema.define(version: 20150320034302) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "event_id"
     t.integer  "user_id"
-    t.boolean  "admin"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "admin",      default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "subscriptions", ["event_id"], name: "index_subscriptions_on_event_id", using: :btree
+  add_index "subscriptions", ["user_id", "event_id"], name: "index_subscriptions_on_user_id_and_event_id", unique: true, using: :btree
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|

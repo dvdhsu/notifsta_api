@@ -5,6 +5,8 @@ class Notification < ActiveRecord::Base
   validates :type, presence: true
   validates :channel, presence: true
 
+  delegate :event, to: :channel
+
   after_commit :parse_push_notify
   after_commit :roost_push_notify
   after_commit :websocket_notify

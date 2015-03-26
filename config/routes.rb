@@ -1,8 +1,5 @@
 NotifstaWebapp::Application.routes.draw do
   root to: 'pages#home'
-  get "webclient", to: "pages#webclient", as: "webclient"
-  get "home", to: "pages#home", as: "home"
-  get "event_admin", to: "pages#event_admin", as: "event_admin"
 
   scope 'v1' do
     scope 'auth' do
@@ -22,13 +19,12 @@ NotifstaWebapp::Application.routes.draw do
     end
     resources :responses, only: [:show], controller: :api_responses
   end
-  
+
   devise_for :users
 
   namespace :admin do
     root "base#index"
     resources :users
-    
   end
 
 end

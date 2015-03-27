@@ -42,6 +42,9 @@ survey = food_channel.notifications.create!(type: "Survey", notification_guts: "
 
 survey.options.create!(option_guts: "Burgers")
 survey.options.create!(option_guts: "Pizza")
+survey.options.create!(option_guts: "Cauliflowers")
+survey.options.create!(option_guts: "Carrots")
+survey.options.create!(option_guts: "Swiss cheese")
 
 logistics_channel.notifications.create!(type: "Message", notification_guts: "first notification in logistics!")
 
@@ -49,22 +52,9 @@ logistics_channel.notifications.create!(type: "Message", notification_guts: "fir
 # first user is admin
 for u in User.all
  u.subscriptions.create!(event_id: 1)
- Response.create!(user_id: u.id, option_id: (u.id % 2) + 1)
+ Response.create!(user_id: u.id, option_id: (u.id % 5) + 1)
 end
 
 admin_sub = Subscription.where(user_id: 1).first
 admin_sub.admin = true
 admin_sub.save!
-
-
-
-
-
-
-
-
-
-
-
-
-

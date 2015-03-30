@@ -40,26 +40,28 @@ class ApiNotificationsController < ApplicationController
     else
       begin
         @notification = @channel.notifications.new(notification_params)
-        if @notification.save
-          if @notification.is_a?(Survey)
-            # if there are no options, or if it isn't an array...
-            if option_params.empty? || (not option_params.is_a?(Array))
-              render json: { status: "failure", data: "Cannot create survey without options." }
-              return
-            end
-            for option in option_params
-              begin
-                @notification.options.create!(option_guts: option.to_s)
-              rescue ActiveRecord::RecordInvalid
-                render json: { status: "failure", data: "One of the options failed validation." }
-                @notification.destroy!
+        Notification.transaction do
+          if @notification.save
+            if @notification.is_a?(Survey)
+              # if there are no options, or if it isn't an array...
+              if option_params.empty? || (not option_params.is_a?(Array))
+                render json: { status: "failure", data: "Cannot create survey without options." }
                 return
               end
+              for option in option_params
+                begin
+                  @notification.options.create!(option_guts: option.to_s)
+                rescue ActiveRecord::RecordInvalid
+                  render json: { status: "failure", data: "One of the options failed validation." }
+                  @notification.destroy!
+                  return
+                end
+              end
             end
+            render "notifications/show"
+          else
+            render json: { status: "failure", data: @notification.errors }
           end
-          render "notifications/show"
-        else
-          render json: { status: "failure", data: @notification.errors }
         end
       rescue ActiveRecord::SubclassNotFound
         # if it failed with SubclassNotFound, then it must have had the wrong type

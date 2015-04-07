@@ -24,7 +24,12 @@ u.save!
   puts "#{i} test users created..." if (i % 5 == 0)
 end
 
-e = Event.new(name: "hack_london")
+e = Event.new(name: "hack_london", cover_photo_url: "https://hacklondon.org/images/london2.jpg",
+              address: "Strand Campus, King's College London, WC2R 2LS, London",
+              start_time: DateTime.current.advance(months: -3), 
+              end_time: DateTime.current.advance(months: -3, days: 1))
+
+
 e.save!
 
 gen_channel = e.channels.new(name: "General")

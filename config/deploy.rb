@@ -14,7 +14,7 @@ set :rails_env, 'production'
 
 set :domain, 'notifsta.com'
 set :deploy_to, '/srv/notifsta_api'
-set :repository, 'https://github.com/dvdhsu/notifsta_webapp.git'
+set :repository, 'https://github.com/dvdhsu/notifsta_api.git'
 set :branch, 'master'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.

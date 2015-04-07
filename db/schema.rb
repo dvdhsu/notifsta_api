@@ -28,8 +28,15 @@ ActiveRecord::Schema.define(version: 20150320034302) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "cover_photo_url"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "description"
+    t.string   "address"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

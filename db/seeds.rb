@@ -32,26 +32,17 @@ e = Event.new(name: "hack_london", cover_photo_url: "https://hacklondon.org/imag
 
 e.save!
 
-gen_channel = e.channels.new(name: "General")
-food_channel = e.channels.new(name: "Food")
-logistics_channel = e.channels.new(name: "Logistics")
+notifications = e.channels.create!(name: "Notifications")
 
-gen_channel.save!
-food_channel.save!
-logistics_channel.save!
+notifications.notifications.create!(type: "Message", notification_guts: "First notification!")
 
-gen_channel.notifications.create!(type: "Message", notification_guts: "first notification in general!")
-
-food_channel.notifications.create!(type: "Message", notification_guts: "first notification in food!")
-survey = food_channel.notifications.create!(type: "Survey", notification_guts: "What food?")
+survey = notifications.notifications.create!(type: "Survey", notification_guts: "What food?")
 
 survey.options.create!(option_guts: "Burgers")
 survey.options.create!(option_guts: "Pizza")
 survey.options.create!(option_guts: "Cauliflowers")
 survey.options.create!(option_guts: "Carrots")
 survey.options.create!(option_guts: "Swiss cheese")
-
-logistics_channel.notifications.create!(type: "Message", notification_guts: "first notification in logistics!")
 
 # subscribe users, and respond to survey
 # first user is admin

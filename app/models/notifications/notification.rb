@@ -1,5 +1,5 @@
 class Notification < ActiveRecord::Base
-  belongs_to :channel
+  belongs_to :channel, touch: true
 
   validates :notification_guts, presence: true
   validates :type, presence: true

@@ -1,5 +1,5 @@
 class Channel < ActiveRecord::Base
-  belongs_to :event
+  belongs_to :event, touch: true
   has_many :notifications, -> { order 'id desc' }, dependent: :destroy
 
   validates :event, presence: true

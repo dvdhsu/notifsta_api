@@ -88,29 +88,38 @@ always be "success"; if not, always "failure". "data" contains the response.
             "data": {
                 "id": 1,
                 "name": "hack_london",
-                "created_at": "2015-03-21T07:12:59.771Z",
-                "updated_at": "2015-03-21T07:12:59.771Z",
+                "cover_photo_url": "https://hacklondon.org/images/london2.jpg",
+                "start_time": "2015-01-07T18:33:40.224Z",
+                "end_time": "2015-01-08T18:33:40.224Z",
+                "description": null,
+                "address": "Strand Campus, King's College London, WC2R 2LS, London",
+                "longitude": -0.115997,
+                "latitude": 51.5114864,
+                "created_at": "2015-04-07T18:33:40.265Z",
+                "updated_at": "2015-04-07T18:33:40.265Z",
                 "channels": [
                     {
                         "event_id": 1,
                         "id": 1,
-                        "name": "General",
-                        "created_at": "2015-03-21T07:12:59.804Z",
-                        "updated_at": "2015-03-21T07:12:59.804Z"
-                    },
-                    {
-                        "event_id": 1,
-                        "id": 2,
-                        "name": "Food",
-                        "created_at": "2015-03-21T07:12:59.809Z",
-                        "updated_at": "2015-03-21T07:12:59.809Z"
-                    },
-                    {
-                        "event_id": 1,
-                        "id": 3,
-                        "name": "Logistics",
-                        "created_at": "2015-03-21T07:12:59.818Z",
-                        "updated_at": "2015-03-21T07:12:59.818Z"
+                        "name": "Notifications",
+                        "created_at": "2015-04-07T18:33:40.303Z",
+                        "updated_at": "2015-04-07T18:33:40.303Z",
+                        "notifications": [
+                            {
+                                "channel_id": 1,
+                                "id": 2,
+                                "notification_guts": "What food?",
+                                "created_at": "2015-04-07T18:33:40.368Z",
+                                "updated_at": "2015-04-07T18:33:40.368Z"
+                            },
+                            {
+                                "channel_id": 1,
+                                "id": 1,
+                                "notification_guts": "First notification!",
+                                "created_at": "2015-04-07T18:33:40.336Z",
+                                "updated_at": "2015-04-07T18:33:40.336Z"
+                            }
+                        ]
                     }
                 ]
             }

@@ -24,13 +24,21 @@ u.save!
   puts "#{i} test users created..." if (i % 5 == 0)
 end
 
-e = Event.new(name: "hack_london", cover_photo_url: "https://hacklondon.org/images/london2.jpg",
+e = Event.create!(name: "hack_london", cover_photo_url: "https://hacklondon.org/images/london2.jpg",
               address: "Strand Campus, King's College London, WC2R 2LS, London",
               start_time: DateTime.current.advance(months: -3), 
               end_time: DateTime.current.advance(months: -3, days: 1))
 
+e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "https://hacklondon.org/images/london2.jpg",
+              address: "Said Business School, Oxford, UK",
+              start_time: DateTime.current.advance(months: -2), 
+              end_time: DateTime.current.advance(months: -2, days: 1))
 
-e.save!
+e3 = Event.create!(name: "My Event", cover_photo_url: "https://hacklondon.org/images/london2.jpg",
+              address: "St. Hugh's College, Oxford, UK",
+              start_time: DateTime.current.advance(months: 1), 
+              end_time: DateTime.current.advance(months: 1, days: 1))
+
 
 notifications = e.channels.create!(name: "Notifications")
 
@@ -48,6 +56,8 @@ survey.options.create!(option_guts: "Swiss cheese")
 # first user is admin
 for u in User.all
  u.subscriptions.create!(event_id: 1)
+ u.subscriptions.create!(event_id: 2)
+ u.subscriptions.create!(event_id: 3)
  Response.create!(user_id: u.id, option_id: (u.id % 5) + 1)
 end
 

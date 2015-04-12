@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :reject_locked!, if: :devise_controller?
 
+  def verify_logged_in
+    if current_user.nil?
+      render json: { status: "failure", error: "Authentication failure." }
+      return
+    end
+  end
 
   # Devise permitted params
   def configure_permitted_parameters

@@ -1,7 +1,8 @@
 class ApiResponsesController < ApplicationController
-  acts_as_token_authentication_handler_for User
+  acts_as_token_authentication_handler_for User, fallback_to_devise: false
 
   before_action :set_response, only: [:show]
+  before_action :verify_logged_in
 
   def index
     @survey = Survey.find_by_id(params[:notification_id])

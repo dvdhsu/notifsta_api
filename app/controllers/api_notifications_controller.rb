@@ -1,7 +1,8 @@
 class ApiNotificationsController < ApplicationController
-  acts_as_token_authentication_handler_for User
+  acts_as_token_authentication_handler_for User, fallback_to_devise: false
 
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
+  before_action :verify_logged_in
 
   # GET /notifications.json
   def index

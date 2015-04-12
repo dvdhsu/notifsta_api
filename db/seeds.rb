@@ -24,33 +24,36 @@ u.save!
   puts "#{i} test users created..." if (i % 5 == 0)
 end
 
-e = Event.create!(name: "hack_london", cover_photo_url: "https://hacklondon.org/images/london2.jpg",
+e1 = Event.create!(name: "hack_london", cover_photo_url: "http://www.get-covers.com/wp-content/uploads/2012/03/Beautiful-Sunset.jpg",
               address: "Strand Campus, King's College London, WC2R 2LS, London",
               start_time: DateTime.current.advance(months: -3), 
               end_time: DateTime.current.advance(months: -3, days: 1))
 
-e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "https://hacklondon.org/images/london2.jpg",
+e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "http://www.f-covers.com/cover/colorful-hearts-facebook-cover-timeline-banner-for-fb.jpg",
               address: "Said Business School, Oxford, UK",
               start_time: DateTime.current.advance(months: -2), 
               end_time: DateTime.current.advance(months: -2, days: 1))
 
-e3 = Event.create!(name: "My Event", cover_photo_url: "https://hacklondon.org/images/london2.jpg",
+e3 = Event.create!(name: "My Event", cover_photo_url: "http://i.ytimg.com/vi/dT2hYxr3FTY/maxresdefault.jpg",
               address: "St. Hugh's College, Oxford, UK",
               start_time: DateTime.current.advance(months: 1), 
               end_time: DateTime.current.advance(months: 1, days: 1))
 
+events = [e1, e2, e3]
 
-notifications = e.channels.create!(name: "Notifications")
+for event in events
+  notifications = event.channels.create!(name: "Notifications")
 
-notifications.notifications.create!(type: "Message", notification_guts: "First notification!")
+  notifications.notifications.create!(type: "Message", notification_guts: "First notification!")
 
-survey = notifications.notifications.create!(type: "Survey", notification_guts: "What food?")
+  survey = notifications.notifications.create!(type: "Survey", notification_guts: "What food?")
 
-survey.options.create!(option_guts: "Burgers")
-survey.options.create!(option_guts: "Pizza")
-survey.options.create!(option_guts: "Cauliflowers")
-survey.options.create!(option_guts: "Carrots")
-survey.options.create!(option_guts: "Swiss cheese")
+  survey.options.create!(option_guts: "Burgers")
+  survey.options.create!(option_guts: "Pizza")
+  survey.options.create!(option_guts: "Cauliflowers")
+  survey.options.create!(option_guts: "Carrots")
+  survey.options.create!(option_guts: "Swiss cheese")
+end
 
 # subscribe users, and respond to survey
 # first user is admin

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def verify_logged_in
     if current_user.nil?
-      render json: { status: "failure", error: "Authentication failure." }
+      render json: { status: "failure", error: "Authentication failure." }, status: 401
       return
     end
   end

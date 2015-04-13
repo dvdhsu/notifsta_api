@@ -14,7 +14,7 @@ class ParsePushWorker
       channel: @notification.channel.name
     }
     # TODO: this needs to be changed to channel.id
-    push = Parse::Push.new(data, @notification.channel.name)
+    push = Parse::Push.new(data, @notification.channel.guid)
     puts "Sending Parse push notification..."
     push.save
   end

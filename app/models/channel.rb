@@ -5,4 +5,10 @@ class Channel < ActiveRecord::Base
   validates :event, presence: true
   validates :name, presence: true
   validates_uniqueness_of :name, scope: :event_id
+
+  before_save :generate_guid
+
+  def generate_guid
+    self.guid = SecureRandom.uuid
+  end
 end

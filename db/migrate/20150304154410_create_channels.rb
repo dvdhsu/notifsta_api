@@ -2,6 +2,7 @@ class CreateChannels < ActiveRecord::Migration
   def change
     create_table :channels do |t|
       t.string :name
+      t.string :guid
       t.references :event, index: true
 
       t.timestamps null: false

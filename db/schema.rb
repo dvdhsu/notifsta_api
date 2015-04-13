@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20150320034302) do
 
   create_table "channels", force: :cascade do |t|
     t.string   "name"
+    t.string   "guid"
     t.integer  "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

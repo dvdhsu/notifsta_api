@@ -9,6 +9,6 @@ class Channel < ActiveRecord::Base
   before_save :generate_guid
 
   def generate_guid
-    self.guid = SecureRandom.uuid
+    self.guid = 'c' + SecureRandom.uuid
   end
 end

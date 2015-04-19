@@ -14,7 +14,6 @@ gem 'rabl'
 gem 'oj'
 gem 'cancancan', '~> 1.10'
 gem 'geocoder'
-gem 'omniauth-facebook'
 
 # Standard Rails gems
 gem 'rails', '4.2.0'

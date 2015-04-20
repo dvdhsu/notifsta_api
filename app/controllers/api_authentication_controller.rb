@@ -1,5 +1,4 @@
 class ApiAuthenticationController < ApplicationController
-
   before_action :authenticate_user!, only: [
     :get_authentication_token
   ]
@@ -22,6 +21,34 @@ class ApiAuthenticationController < ApplicationController
     else
       render json: { status: "failure" }
     end
+  end
+
+  def facebookRegisterOrLogin
+    @user = User.where(facebook_id: params[:facebook_id]).first
+    if @user.nil?
+      @user = User.new(
+        facebook_id: params[:facebook_id],
+        email: params[:email],
+      )
+      if @user.check_facebook_token(params[:facebook_token])
+        # fb token is valid, so create user and render
+        @user.facebook_token = params[:facebook_token]
+        @user.password = SecureRandom.uuid
+        @user.skip_confirmation!
+        @user.save!
+      else
+        render json: { status: "failure", error: "Facebook token invalid." }
+        return
+      end
+    else
+      # we've found the linked account, and now check the token
+      if not @user.check_facebook_token(params[:facebook_token])
+        render json: { status: "failure", error: "Facebook token invalid." }
+        return
+      end
+    end
+    # user created, and facebook token is valid
+    render json: { status: "success", data: @user.as_json(include: { events: { include: :channels } }) }
   end
 
   def get_authentication_token

@@ -65,6 +65,17 @@ class ApiAuthenticationController < ApplicationController
     render json: { status: "success", data: @user.as_json(include: { events: { include: :channels } }) }
   end
 
+  def register
+    @user = User.new(email: params[:email], password: params[:password])
+    if @user.valid?
+      @user.skip_confirmation!
+      @user.save!
+      render json: { status: "success", data: @user.as_json(include: { events: { include: :channels } }) }
+    else
+      render json: { status: "failure", error: "User invalid." }
+    end
+  end
+
   def get_authentication_token
     render json: { status: "success", data: { authentication_token: current_user.authentication_token } }
   end

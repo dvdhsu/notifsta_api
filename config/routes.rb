@@ -7,11 +7,14 @@ NotifstaWebapp::Application.routes.draw do
       get 'logout' => 'api_authentication#logout'
       get 'facebook' => 'api_authentication#facebook_register_or_login'
       get 'login_with_token' => 'api_authentication#login_with_token'
+      get 'register' => 'api_authentication#register'
       get 'get_authentication_token' => 'api_authentication#get_authentication_token'
     end
     resources :users, only: [:show], controller: :api_users
+    resources :subscriptions, only: [:show, :create, :update, :destroy], controller: :api_subscriptions
     resources :events, only: [:show], controller: :api_events do
       resources :channels, only: [:index], controller: :api_channels
+      resources :subscriptions, only: :index, controller: :api_subscriptions
     end
     resources :channels, only: [:show], controller: :api_channels do
       resources :notifications, only: [:index, :create], controller: :api_notifications

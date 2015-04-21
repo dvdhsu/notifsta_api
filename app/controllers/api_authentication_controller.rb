@@ -33,7 +33,7 @@ class ApiAuthenticationController < ApplicationController
     end
   end
 
-  def facebookRegisterOrLogin
+  def facebook_register_or_login
     @user = User.where(facebook_id: params[:facebook_id]).first
     if @user.nil?
       @user = User.new(

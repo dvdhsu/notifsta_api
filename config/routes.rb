@@ -5,7 +5,7 @@ NotifstaWebapp::Application.routes.draw do
     scope 'auth' do
       get 'login' => 'api_authentication#login'
       get 'logout' => 'api_authentication#logout'
-      get 'facebook' => 'api_authentication#facebookRegisterOrLogin'
+      get 'facebook' => 'api_authentication#facebook_register_or_login'
       get 'login_with_token' => 'api_authentication#login_with_token'
       get 'get_authentication_token' => 'api_authentication#get_authentication_token'
     end

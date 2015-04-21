@@ -61,12 +61,8 @@ end
 # subscribe users, and respond to survey
 # first user is admin
 for u in User.all
- u.subscriptions.create!(event_id: 1)
- u.subscriptions.create!(event_id: 2)
- u.subscriptions.create!(event_id: 3)
+ u.subscriptions.create!(event_id: 1, admin: true)
+ u.subscriptions.create!(event_id: 2, admin: true)
+ u.subscriptions.create!(event_id: 3, admin: true)
  Response.create!(user_id: u.id, option_id: (u.id % 5) + 1)
 end
-
-admin_sub = Subscription.where(user_id: 1).first
-admin_sub.admin = true
-admin_sub.save!

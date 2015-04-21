@@ -14,7 +14,7 @@ class ApiAuthenticationController < ApplicationController
 
   def login_with_token
     @user = User.where(email: params[:email]).first
-    if not @user.nil? and @user.token == params[:token]
+    if not @user.nil? and @user.authentication_token == params[:token]
       render json: { status: "success", data: @user.as_json(include: { events: { include: :channels } }) }
     else
       render json: { status: "failure" }

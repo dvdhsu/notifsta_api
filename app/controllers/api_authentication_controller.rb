@@ -12,6 +12,16 @@ class ApiAuthenticationController < ApplicationController
     end
   end
 
+  def login_with_token
+    @user = User.where(email: params[:email]).first
+    if not @user.nil? and @user.token == params[:token]
+      render json: { status: "success", data: @user.as_json(include: { events: { include: :channels } }) }
+    else
+      render json: { status: "failure" }
+    end
+  end
+
+
   def logout
     @user = User.where(authentication_token: params[:authentication_token]).first
     if not @user.nil?

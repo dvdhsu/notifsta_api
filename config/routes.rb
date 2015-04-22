@@ -11,7 +11,7 @@ NotifstaWebapp::Application.routes.draw do
       get 'get_authentication_token' => 'api_authentication#get_authentication_token'
     end
     resources :users, only: [:show], controller: :api_users
-    resources :subscriptions, only: [:show, :create, :update, :destroy], controller: :api_subscriptions
+    resources :subscriptions, only: [:show, :create, :destroy], controller: :api_subscriptions
     resources :events, only: [:show], controller: :api_events do
       resources :channels, only: [:index], controller: :api_channels
       resources :subscriptions, only: :index, controller: :api_subscriptions

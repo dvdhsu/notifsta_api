@@ -4,4 +4,5 @@ class Subscription < ActiveRecord::Base
 
   validates :event, presence: true
   validates :user, presence: true
+  validates_uniqueness_of :event_id, scope: :user_id
 end

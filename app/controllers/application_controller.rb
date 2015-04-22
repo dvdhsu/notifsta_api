@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :reject_locked!, if: :devise_controller?
 
+  rescue_from CanCan::AccessDenied do |exception|
+    render json: { status: "failure", error: "Record not found, or unauthorized." }, status: 404
+  end
+
   def verify_logged_in
     if current_user.nil?
       render json: { status: "failure", error: "Authentication failure." }, status: 401

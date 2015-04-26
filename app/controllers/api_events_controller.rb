@@ -6,12 +6,16 @@ class ApiEventsController < ApplicationController
 
   # GET /events.json
   # maybe allow for site admins later on?
-=begin
   def index
-    @events = Event.all
-    render json: { status: "success", data: @events }
+    @all_event_ids = Event.all.pluck(:id)
+    @my_event_ids = current_user.subscriptions.pluck(:event_id)
+    @my_events = Event.find(@my_event_ids)
+    @not_my_events = Event.find(@all_event_ids - @my_event_ids)
+
+    render json: { status: "success", data:
+                   { subscribed: @my_events.as_json, not_subscribed: @not_my_events.as_json }
+                 }
   end
-=end
 
   # GET /events/1.json
   def show

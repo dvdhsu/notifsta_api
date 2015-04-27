@@ -15,7 +15,9 @@ NotifstaWebapp::Application.routes.draw do
     resources :events, only: [:index, :show], controller: :api_events do
       resources :channels, only: [:index], controller: :api_channels
       resources :subscriptions, only: :index, controller: :api_subscriptions
+      resources :subevents, only: [:index, :create], controller: :api_subevents
     end
+    resources :subevents, only: [:destroy], controller: :api_subevents
     resources :channels, only: [:show], controller: :api_channels do
       resources :notifications, only: [:index, :create], controller: :api_notifications
     end

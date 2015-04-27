@@ -10,6 +10,7 @@ class Ability
       can :read, Event
       can :read, Channel
       can :read, Notification
+      can :read, Subevent
       can :manage, Event do |e|
         # user admins the event
         e.admins.where(user_id: user.id).any?
@@ -23,6 +24,10 @@ class Ability
         s.event.admins.where(user_id: user.id).any? ||
         # or it's my own subscription
         s.user_id == user.id
+      end
+      can :manage, Subevent do |s|
+        # user is the event admin
+        s.event.admins.where(user_id: user.id).any?
       end
       can [:create, :update, :destroy, :read], Response do |r|
         # can read as event admin

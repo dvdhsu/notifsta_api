@@ -45,6 +45,11 @@ e3 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthu
 events = [e1, e2, e3]
 
 for event in events
+  event.subevents.create!(name: "Welcome event", start_time: DateTime.now, 
+                          end_time: DateTime.now.advance(minutes: 20), location: "Main quad", description: "To welcome everybody.")
+  event.subevents.create!(name: "Goodbye event", start_time: DateTime.now.advance(hours: 10), 
+                          end_time: DateTime.now.advance(hours: 10, minutes: 20), location: "Main quad", 
+                          description: "To goodbye everybody.")
   notifications = event.channels.create!(name: "Notifications")
 
   notifications.notifications.create!(type: "Message", notification_guts: "Welcome!")

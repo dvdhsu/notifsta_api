@@ -6,6 +6,7 @@ class CreateSubevents < ActiveRecord::Migration
       t.references :event, index: true
       t.string :name
       t.string :location
+      t.string :description
     end
     add_foreign_key :subevents, :events
   end

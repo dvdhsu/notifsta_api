@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20150427001400) do
     t.integer  "event_id"
     t.string   "name"
     t.string   "location"
+    t.string   "description"
   end
 
   add_index "subevents", ["event_id"], name: "index_subevents_on_event_id", using: :btree

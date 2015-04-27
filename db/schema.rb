@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150426234928) do
+ActiveRecord::Schema.define(version: 20150427001400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,16 @@ ActiveRecord::Schema.define(version: 20150426234928) do
   add_index "responses", ["option_id"], name: "index_responses_on_option_id", using: :btree
   add_index "responses", ["user_id"], name: "index_responses_on_user_id", using: :btree
 
+  create_table "subevents", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "event_id"
+    t.string   "name"
+    t.string   "location"
+  end
+
+  add_index "subevents", ["event_id"], name: "index_subevents_on_event_id", using: :btree
+
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "event_id"
     t.integer  "user_id"
@@ -131,6 +141,7 @@ ActiveRecord::Schema.define(version: 20150426234928) do
   add_foreign_key "options", "notifications"
   add_foreign_key "responses", "options"
   add_foreign_key "responses", "users"
+  add_foreign_key "subevents", "events"
   add_foreign_key "subscriptions", "events"
   add_foreign_key "subscriptions", "users"
 end

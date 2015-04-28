@@ -51,10 +51,10 @@ class ApiEventsController < ApplicationController
 
   # PATCH/PUT /events/1.json
   def update
+    authorize! :manage, @event
+
     @event.start_time = @start_time
     @event.end_time = @end_time
-
-    authorize! :manage, @event
 
     if @event.update(event_params)
       render json: { status: "success", data: @event.as_json }

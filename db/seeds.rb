@@ -30,7 +30,8 @@ e1 = Event.create!(name: "hack_london", cover_photo_url: "http://www.get-covers.
               address: "Strand Campus, King's College London",
               start_time: now.advance(months: 3), 
               end_time: now.advance(months: 3, hours: 24),
-              description: "Hack London is the largest U.K. hackathon. We hope you enjoy your time here.",
+              description: "Hack London is the largest U.K. hackathon. We hope you enjoy your time here.
+              HHack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.ack hack hack hack hack. ",
               facebook_url: "https://www.fb.com/hacklondonuk",
               website_url: "http://hacklondon.org")
 
@@ -43,6 +44,7 @@ e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "http://www.f-cover
               website_url: "http://oxfordinspires.org")
 
 e3 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthughsball.com/notifsta_background.jpeg",
+              event_map_url: "http://cdn.notifsta.com/event_maps/hughs.jpg",
               address: "St. Hugh's College, Oxford, UK",
               start_time: now.advance(months: 1), 
               end_time: now.advance(months: 1, hours: 8),

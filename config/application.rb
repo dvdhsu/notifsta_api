@@ -39,7 +39,8 @@ module NotifstaWebapp
     # allow everything through CORS. Very insecure. Should be fixed.
     config.action_dispatch.default_headers.merge!({
       'Access-Control-Allow-Origin' => '*',
-      'Access-Control-Request-Method' => '*'
+      'Access-Control-Request-Method' => '*',
+      'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PATCH, OPTIONS'
     })
 
     # disable rack lock for websockets

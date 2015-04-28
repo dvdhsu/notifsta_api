@@ -1,6 +1,7 @@
 NotifstaWebapp::Application.routes.draw do
   root to: 'pages#home'
 
+  post 'v1/events/:id', to: 'api_events#update', as: 'hacky_event_update'
   scope 'v1' do
     scope 'auth' do
       get 'login' => 'api_authentication#login'

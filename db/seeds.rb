@@ -24,22 +24,24 @@ u.save!
   puts "#{i} test users created..." if (i % 5 == 0)
 end
 
+now = DateTime.current
+
 e1 = Event.create!(name: "hack_london", cover_photo_url: "http://www.get-covers.com/wp-content/uploads/2012/02/Wooden.jpg",
               address: "Strand Campus, King's College London",
-              start_time: DateTime.current.advance(months: 3), 
-              end_time: DateTime.current.advance(months: 3, hours: 24),
+              start_time: now.advance(months: 3), 
+              end_time: now.advance(months: 3, hours: 24),
               description: "Hack London is the largest U.K. hackathon. We hope you enjoy your time here.")
 
 e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "http://www.f-covers.com/cover/colorful-hearts-facebook-cover-timeline-banner-for-fb.jpg",
               address: "Said Business School, Oxford, UK",
-              start_time: DateTime.current.advance(months: -2), 
-              end_time: DateTime.current.advance(months: -2, hours: 3),
+              start_time: now.advance(months: -2), 
+              end_time: now.advance(months: -2, hours: 3),
               description: "Oxford Inspires hopes to inspire you. Let us know how we can help.")
 
 e3 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthughsball.com/notifsta_background.jpeg",
               address: "St. Hugh's College, Oxford, UK",
-              start_time: DateTime.current.advance(months: 1), 
-              end_time: DateTime.current.advance(months: 1, hours: 8),
+              start_time: now.advance(months: 1), 
+              end_time: now.advance(months: 1, hours: 8),
               description: "St. Hugh's is delighted to invite you to our Ball.")
 
 events = [e1, e2, e3]

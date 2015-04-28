@@ -3,6 +3,7 @@ class ApiEventsController < ApplicationController
 
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :verify_logged_in
+  before_action :parse_dates, only: [:update, :create]
 
   # GET /events.json
   # maybe allow for site admins later on?
@@ -32,35 +33,42 @@ class ApiEventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    respond_to do |format|
-      if @event.save
-        format.json { render :show, status: :created, location: @event }
-      else
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if not (@start_time and @end_time)
+      render json: { status: "failure", error: "Start / end datetime not valid." }
+      return
+    end
+
+    @event.start_time = @start_time
+    @event.end_time = @end_time
+
+    if @event.save
+      @event.subscriptions.create!(user_id: current_user.id, admin: true)
+      render json: { status: "success", data: @event.as_json }
+    else
+      render json: { status: "failure", error: "Event not valid." }
     end
   end
 
   # PATCH/PUT /events/1.json
   def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.json { render :show, status: :ok, location: @event }
-      else
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+    @event.start_time = @start_time
+    @event.end_time = @end_time
 
-  # DELETE /events/1.json
-  def destroy
-    @event.destroy
-    respond_to do |format|
-      format.json { head :no_content }
+    authorize! :manage, @event
+
+    if @event.update(event_params)
+      render json: { status: "success", data: @event.as_json }
+    else
+      render json: { status: "failure", error: "Event not valid." }
     end
   end
 
   private
+    def parse_dates
+      @start_time = DateTime.parse(event_params[:start_time]) rescue nil
+      @end_time = DateTime.parse(event_params[:end_time]) rescue nil
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find_by_id(params[:id])
@@ -68,6 +76,6 @@ class ApiEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params[:event]
+      params.require(:event).permit(:name, :cover_photo_url, :start_time, :end_time, :description, :address, :event_map_url)
     end
 end

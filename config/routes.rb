@@ -12,7 +12,7 @@ NotifstaWebapp::Application.routes.draw do
     end
     resources :users, only: [:show], controller: :api_users
     resources :subscriptions, only: [:show, :create, :destroy], controller: :api_subscriptions
-    resources :events, only: [:index, :show], controller: :api_events do
+    resources :events, only: [:index, :show, :create, :update], controller: :api_events do
       resources :channels, only: [:index], controller: :api_channels
       resources :subscriptions, only: :index, controller: :api_subscriptions
       resources :subevents, only: [:index, :create], controller: :api_subevents

@@ -8,11 +8,18 @@ class Event < ActiveRecord::Base
   validates :address, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
+  validate :start_time_before_end_time
 
   geocoded_by :address
   after_validation :geocode
 
   def admins
     self.subscriptions.where(admin: true)
+  end
+
+  def start_time_before_end_time
+    if start_time >= end_time
+      errors.add(:start_time, "can't be before end_time")
+    end
   end
 end

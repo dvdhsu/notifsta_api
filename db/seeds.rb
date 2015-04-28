@@ -30,19 +30,25 @@ e1 = Event.create!(name: "hack_london", cover_photo_url: "http://www.get-covers.
               address: "Strand Campus, King's College London",
               start_time: now.advance(months: 3), 
               end_time: now.advance(months: 3, hours: 24),
-              description: "Hack London is the largest U.K. hackathon. We hope you enjoy your time here.")
+              description: "Hack London is the largest U.K. hackathon. We hope you enjoy your time here.",
+              facebook_url: "https://www.facebook.com/hacklondonuk",
+              website_url: "hacklondon.org")
 
 e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "http://www.f-covers.com/cover/colorful-hearts-facebook-cover-timeline-banner-for-fb.jpg",
               address: "Said Business School, Oxford, UK",
               start_time: now.advance(months: -2), 
               end_time: now.advance(months: -2, hours: 3),
-              description: "Oxford Inspires hopes to inspire you. Let us know how we can help.")
+              description: "Oxford Inspires hopes to inspire you. Let us know how we can help.",
+              facebook_url: "https://www.facebook.com/events/353036741560670/",
+              website_url: "oxfordinspires.org")
 
 e3 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthughsball.com/notifsta_background.jpeg",
               address: "St. Hugh's College, Oxford, UK",
               start_time: now.advance(months: 1), 
               end_time: now.advance(months: 1, hours: 8),
-              description: "St. Hugh's is delighted to invite you to our Ball.")
+              description: "St. Hugh's is delighted to invite you to our Ball.",
+              facebook_url: "https://www.facebook.com/hacklondonuk",
+              website_url: "sthughsball.com")
 
 events = [e1, e2, e3]
 

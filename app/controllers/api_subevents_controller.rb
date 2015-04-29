@@ -39,7 +39,7 @@ class ApiSubeventsController < ApplicationController
     if @subevent.save
       render json: { status: "success", data: @subevent.as_json }
     else
-      render json: { status: "failure", error: "Subevent not valid." }
+      render json: { status: "failure", data: "Subevent not valid." }
     end
   end
 

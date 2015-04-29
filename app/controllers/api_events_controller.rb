@@ -46,6 +46,7 @@ class ApiEventsController < ApplicationController
 
     if @event.save
       @event.subscriptions.create!(user_id: current_user.id, admin: true)
+      @event.channels.create!(name: "Notifications")
       render json: { status: "success", data: @event.as_json }
     else
       render json: { status: "failure", error: "Event not valid." }

@@ -38,7 +38,7 @@ now = DateTime.current
 
 e1 = Event.create!(name: "hack_london", cover_photo_url: "http://www.get-covers.com/wp-content/uploads/2012/02/Wooden.jpg",
               address: "Strand Campus, King's College London",
-              start_time: now.advance(months: 3), 
+              start_time: now.advance(months: 3),
               end_time: now.advance(months: 3, hours: 24),
               description: "Hack London is the largest U.K. hackathon. We hope you enjoy your time here.",
               facebook_url: "https://www.fb.com/hacklondonuk",
@@ -46,7 +46,7 @@ e1 = Event.create!(name: "hack_london", cover_photo_url: "http://www.get-covers.
 
 e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "http://www.f-covers.com/cover/colorful-hearts-facebook-cover-timeline-banner-for-fb.jpg",
               address: "Said Business School, Oxford, UK",
-              start_time: now.advance(months: -2), 
+              start_time: now.advance(months: -2),
               end_time: now.advance(months: -2, hours: 3),
               description: "Oxford Inspires hopes to inspire you. Let us know how we can help.",
               facebook_url: "https://www.fb.com/hacklondonuk",
@@ -55,7 +55,7 @@ e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "http://www.f-cover
 e3 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthughsball.com/notifsta_background.jpeg",
               event_map_url: "http://cdn.notifsta.com/event_maps/hughs.jpg",
               address: "St. Hugh's College, Oxford, UK",
-              start_time: now.advance(months: 1), 
+              start_time: now.advance(months: 1),
               end_time: now.advance(months: 1, hours: 8),
               description: "St. Hugh's is delighted to invite you to our Ball.",
               facebook_url: "https://www.fb.com/hacklondonuk",
@@ -74,18 +74,18 @@ for event in events
   event.subevents.create!(name: "Welcome event for administrators", start_time: start_time,
                           end_time: start_time.advance(minutes: 20), location: "Gherkin quad", description: "To welcome everybody.")
 
-  event.subevents.create!(name: "Roger Thiel", start_time: end_time.advance(hours: -1), 
+  event.subevents.create!(name: "Roger Thiel", start_time: end_time.advance(hours: -1),
                           end_time: end_time.advance(minutes: -30), location: "Lecture Theater 1", description: "To goodbye everybody.")
-  event.subevents.create!(name: "Mark Ramsey", start_time: end_time.advance(hours: -1), 
+  event.subevents.create!(name: "Mark Ramsey", start_time: end_time.advance(hours: -1),
                           end_time: end_time.advance(minutes: -30), location: "Lecture Theater 2", description: "To goodbye everybody.")
-  event.subevents.create!(name: "Marak Mourash", start_time: end_time.advance(hours: -1), end_time: end_time.advance(minutes: -30), 
+  event.subevents.create!(name: "Marak Mourash", start_time: end_time.advance(hours: -1), end_time: end_time.advance(minutes: -30),
                           location: "Lecture Theater 3", description: "To goodbye everybody.")
 
-  event.subevents.create!(name: "Goodbye event", start_time: end_time.advance(minutes: -20), end_time: end_time, 
+  event.subevents.create!(name: "Goodbye event", start_time: end_time.advance(minutes: -20), end_time: end_time,
                           location: "Main quad", description: "To goodbye everybody.")
-  event.subevents.create!(name: "Goodbye event for sponsors", start_time: end_time.advance(minutes: -20), end_time: end_time, 
+  event.subevents.create!(name: "Goodbye event for sponsors", start_time: end_time.advance(minutes: -20), end_time: end_time,
                           location: "Boardroom", description: "To goodbye everybody.")
-  event.subevents.create!(name: "Goodbye event for administrators", start_time: end_time.advance(minutes: -20), end_time: end_time, 
+  event.subevents.create!(name: "Goodbye event for administrators", start_time: end_time.advance(minutes: -20), end_time: end_time,
                           location: "Gherkin quad", description: "To goodbye everybody.")
 
   notifications = event.channels.create!(name: "Notifications")

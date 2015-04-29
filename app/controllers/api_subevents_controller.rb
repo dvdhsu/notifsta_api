@@ -13,7 +13,7 @@ class ApiSubeventsController < ApplicationController
     if @event.nil? || current_user.events.find_by_id(@event.id).nil?
       render json: { status: "failure", error: "Event not found, or unauthorized." }
     else
-      @subevents = @event.subevents.group_by { |s| s.start_time.inspect }
+      @subevents = @event.subevents.group_by { |s| s.start_time.to_formatted_s(:iso8601) }
       render json: { status: "success", data: @subevents }
     end
   end

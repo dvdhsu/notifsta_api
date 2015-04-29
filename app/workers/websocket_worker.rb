@@ -19,7 +19,7 @@ class WebsocketWorker
     }
 
     puts "Sending out websocket notification..."
-    WebsocketRails["notifications_#{@notification.channel.event.name}".to_sym].trigger 'new', data
+    WebsocketRails[@notification.channel.guid.to_sym].trigger 'new', data
   end
 
 end

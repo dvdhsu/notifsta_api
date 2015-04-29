@@ -25,7 +25,10 @@ class ApiEventsController < ApplicationController
     if @event.nil? || current_user.events.find_by_id(@event.id).nil?
       render json: { status: "failure", error: "Event not found, or unauthorized." }
     else
-      render json: { status: "success", data: @event.as_json(include: {channels: {include: :notifications}, subevents:{} }) }
+      @data = @event.as_json(include: { channels: {include: :notifications } })
+      @subevents = @event.subevents.group_by { |s| s.start_time.inspect }
+      @data["subevents"] = @subevents.as_json
+      render json: { status: "success", data: @data }
     end
   end
 

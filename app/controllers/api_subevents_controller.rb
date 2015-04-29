@@ -11,7 +11,7 @@ class ApiSubeventsController < ApplicationController
   def index
     # if the user doesn't have the event...
     if @event.nil? || current_user.events.find_by_id(@event.id).nil?
-      render json: { status: "failure", error: "Event not found, or unauthorized." }
+      render json: { status: "failure", data: "Event not found, or unauthorized." }
     else
       @subevents = @event.subevents.group_by { |s| s.start_time.to_formatted_s(:iso8601) }
       render json: { status: "success", data: @subevents }
@@ -21,7 +21,7 @@ class ApiSubeventsController < ApplicationController
   # POST /suvevents.json
   def create
     if not (@start_time and @end_time)
-      render json: { status: "failure", error: "Start / end datetime not valid." }
+      render json: { status: "failure", data: "Start / end datetime not valid." }
       # probably check if in between start_time and end_time of event
       return
     end
@@ -50,9 +50,6 @@ class ApiSubeventsController < ApplicationController
     render json: { status: "success" }
   end
 
-=begin
-TODO: @subevent.update doesn't work if a certain param is nil.
-Change this to use strong parameters
   def update
     authorize! :manage, @subevent
     if @subevent.update(
@@ -67,7 +64,6 @@ Change this to use strong parameters
       render json: { status: "failure", message: "Subevent not valid." }
     end
   end
-=end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -8,7 +8,7 @@ NotifstaWebapp::Application.routes.draw do
       get 'logout' => 'api_authentication#logout'
       get 'facebook' => 'api_authentication#facebook_register_or_login'
       get 'login_with_token' => 'api_authentication#login_with_token'
-      get 'register' => 'api_authentication#register'
+      post 'register' => 'api_authentication#register'
       get 'get_authentication_token' => 'api_authentication#get_authentication_token'
     end
     resources :users, only: [:show], controller: :api_users

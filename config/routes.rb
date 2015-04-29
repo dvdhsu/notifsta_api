@@ -2,6 +2,7 @@ NotifstaWebapp::Application.routes.draw do
   root to: 'pages#home'
 
   post 'v1/events/:id', to: 'api_events#update', as: 'hacky_event_update'
+  post 'v1/subevents/:id', to: 'api_subevents#update', as: 'hacky_subevent_update'
   scope 'v1' do
     scope 'auth' do
       get 'login' => 'api_authentication#login'
@@ -18,7 +19,7 @@ NotifstaWebapp::Application.routes.draw do
       resources :subscriptions, only: :index, controller: :api_subscriptions
       resources :subevents, only: [:index, :create], controller: :api_subevents
     end
-    resources :subevents, only: [:destroy], controller: :api_subevents
+    resources :subevents, only: [:destroy, :update], controller: :api_subevents
     resources :channels, only: [:show], controller: :api_channels do
       resources :notifications, only: [:index, :create], controller: :api_notifications
     end

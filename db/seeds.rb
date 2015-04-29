@@ -55,11 +55,30 @@ e3 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthu
 events = [e1, e2, e3]
 
 for event in events
-  event.subevents.create!(name: "Welcome event", start_time: DateTime.now, 
-                          end_time: DateTime.now.advance(minutes: 20), location: "Main quad", description: "To welcome everybody.")
-  event.subevents.create!(name: "Goodbye event", start_time: DateTime.now.advance(hours: 10), 
-                          end_time: DateTime.now.advance(hours: 10, minutes: 20), location: "Main quad", 
-                          description: "To goodbye everybody.")
+  start_time = event.start_time
+  end_time = event.end_time
+
+  event.subevents.create!(name: "Welcome event", start_time: start_time,
+                          end_time: start_time.advance(minutes: 20), location: "Main quad", description: "To welcome everybody.")
+  event.subevents.create!(name: "Welcome event 2", start_time: start_time,
+                          end_time: start_time.advance(minutes: 20), location: "Main quad", description: "To welcome everybody.")
+  event.subevents.create!(name: "Welcome event 3", start_time: start_time,
+                          end_time: start_time.advance(minutes: 20), location: "Main quad", description: "To welcome everybody.")
+
+  event.subevents.create!(name: "Main speaker", start_time: end_time.advance(hours: -1), 
+                          end_time: end_time.advance(minutes: -30), location: "Main quad", description: "To goodbye everybody.")
+  event.subevents.create!(name: "Main speaker2", start_time: end_time.advance(hours: -1), 
+                          end_time: end_time.advance(minutes: -30), location: "Main quad", description: "To goodbye everybody.")
+  event.subevents.create!(name: "Main speaker2", start_time: end_time.advance(hours: -1), end_time: end_time.advance(minutes: -30), 
+                          location: "Main quad", description: "To goodbye everybody.")
+
+  event.subevents.create!(name: "Goodbye event", start_time: end_time.advance(minutes: -20), end_time: end_time, 
+                          location: "Main quad", description: "To goodbye everybody.")
+  event.subevents.create!(name: "Goodbye event2", start_time: end_time.advance(minutes: -20), end_time: end_time, 
+                          location: "Main quad", description: "To goodbye everybody.")
+  event.subevents.create!(name: "Goodbye event2", start_time: end_time.advance(minutes: -20), end_time: end_time, 
+                          location: "Main quad", description: "To goodbye everybody.")
+
   notifications = event.channels.create!(name: "Notifications")
 
   notifications.notifications.create!(type: "Message", notification_guts: "Welcome!")

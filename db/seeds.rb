@@ -11,6 +11,16 @@ u = User.new(
 u.skip_confirmation!
 u.save!
 
+# account for Apple Review
+u = User.new(
+    email: "apple@apple.com",
+    password: "asdf",
+    password_confirmation: "asdf",
+    admin: false
+)
+u.skip_confirmation!
+u.save!
+
 # Test user accounts
 (1..50).each do |i|
   u = User.new(
@@ -30,8 +40,7 @@ e1 = Event.create!(name: "hack_london", cover_photo_url: "http://www.get-covers.
               address: "Strand Campus, King's College London",
               start_time: now.advance(months: 3), 
               end_time: now.advance(months: 3, hours: 24),
-              description: "Hack London is the largest U.K. hackathon. We hope you enjoy your time here.
-              HHack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.Hack hack hack hack hack.ack hack hack hack hack. ",
+              description: "Hack London is the largest U.K. hackathon. We hope you enjoy your time here.",
               facebook_url: "https://www.fb.com/hacklondonuk",
               website_url: "http://hacklondon.org")
 
@@ -58,32 +67,47 @@ for event in events
   start_time = event.start_time
   end_time = event.end_time
 
-  event.subevents.create!(name: "Welcome event", start_time: start_time,
+  event.subevents.create!(name: "Welcome event (general)", start_time: start_time,
                           end_time: start_time.advance(minutes: 20), location: "Main quad", description: "To welcome everybody.")
-  event.subevents.create!(name: "Welcome event 2", start_time: start_time,
-                          end_time: start_time.advance(minutes: 20), location: "Main quad", description: "To welcome everybody.")
-  event.subevents.create!(name: "Welcome event 3", start_time: start_time,
-                          end_time: start_time.advance(minutes: 20), location: "Main quad", description: "To welcome everybody.")
+  event.subevents.create!(name: "Welcome event for sponsors", start_time: start_time,
+                          end_time: start_time.advance(minutes: 20), location: "Boardroom", description: "To welcome everybody.")
+  event.subevents.create!(name: "Welcome event for administrators", start_time: start_time,
+                          end_time: start_time.advance(minutes: 20), location: "Gherkin quad", description: "To welcome everybody.")
 
-  event.subevents.create!(name: "Main speaker", start_time: end_time.advance(hours: -1), 
-                          end_time: end_time.advance(minutes: -30), location: "Main quad", description: "To goodbye everybody.")
-  event.subevents.create!(name: "Main speaker2", start_time: end_time.advance(hours: -1), 
-                          end_time: end_time.advance(minutes: -30), location: "Main quad", description: "To goodbye everybody.")
-  event.subevents.create!(name: "Main speaker2", start_time: end_time.advance(hours: -1), end_time: end_time.advance(minutes: -30), 
-                          location: "Main quad", description: "To goodbye everybody.")
+  event.subevents.create!(name: "Roger Thiel", start_time: end_time.advance(hours: -1), 
+                          end_time: end_time.advance(minutes: -30), location: "Lecture Theater 1", description: "To goodbye everybody.")
+  event.subevents.create!(name: "Mark Ramsey", start_time: end_time.advance(hours: -1), 
+                          end_time: end_time.advance(minutes: -30), location: "Lecture Theater 2", description: "To goodbye everybody.")
+  event.subevents.create!(name: "Marak Mourash", start_time: end_time.advance(hours: -1), end_time: end_time.advance(minutes: -30), 
+                          location: "Lecture Theater 3", description: "To goodbye everybody.")
 
   event.subevents.create!(name: "Goodbye event", start_time: end_time.advance(minutes: -20), end_time: end_time, 
                           location: "Main quad", description: "To goodbye everybody.")
-  event.subevents.create!(name: "Goodbye event2", start_time: end_time.advance(minutes: -20), end_time: end_time, 
-                          location: "Main quad", description: "To goodbye everybody.")
-  event.subevents.create!(name: "Goodbye event2", start_time: end_time.advance(minutes: -20), end_time: end_time, 
-                          location: "Main quad", description: "To goodbye everybody.")
+  event.subevents.create!(name: "Goodbye event for sponsors", start_time: end_time.advance(minutes: -20), end_time: end_time, 
+                          location: "Boardroom", description: "To goodbye everybody.")
+  event.subevents.create!(name: "Goodbye event for administrators", start_time: end_time.advance(minutes: -20), end_time: end_time, 
+                          location: "Gherkin quad", description: "To goodbye everybody.")
 
   notifications = event.channels.create!(name: "Notifications")
 
-  notifications.notifications.create!(type: "Message", notification_guts: "Welcome!")
-  notifications.notifications.create!(type: "Message", notification_guts: "Food now available in the main quad.")
-  notifications.notifications.create!(type: "Message", notification_guts: "Get ready for breakfast!")
+  if event.id == 1
+    notifications.notifications.create!(type: "Message", notification_guts: "Welcome!")
+    notifications.notifications.create!(type: "Message", notification_guts: "Food now available in the main quad.")
+    notifications.notifications.create!(type: "Message", notification_guts: "Get ready for breakfast!")
+    notifications.notifications.create!(type: "Message", notification_guts: "Breakfast now being served in the Gherkin quad!")
+    notifications.notifications.create!(type: "Message", notification_guts: "Roger Thiel is about to speak in Lecture Theater 1!")
+  elsif event.id == 2
+    notifications.notifications.create!(type: "Message", notification_guts: "Welcome!")
+    notifications.notifications.create!(type: "Message", notification_guts: "Mark Ramsey is about to speak about finance in Lecture Theater 2!")
+    notifications.notifications.create!(type: "Message", notification_guts: "Lunch is now being served in the Main Hall.")
+    notifications.notifications.create!(type: "Message", notification_guts: "Marak Mourash is about to speak about democracies in Lecture Theater 2!")
+  else
+    notifications.notifications.create!(type: "Message", notification_guts: "Welcome!")
+    notifications.notifications.create!(type: "Message", notification_guts: "We have a welcome event in the main quad for general attendees right now.")
+    notifications.notifications.create!(type: "Message", notification_guts: "Champagne reception now in the atrium.")
+    notifications.notifications.create!(type: "Message", notification_guts: "Netowrking session now in Lecture Theater 2.")
+    notifications.notifications.create!(type: "Message", notification_guts: "Anthony Guo is giving a lecture on security in Lecture Theater 1.")
+  end
 
 =begin
   survey = notifications.notifications.create!(type: "Survey", notification_guts: "What food?")
@@ -99,8 +123,8 @@ end
 # subscribe users, and respond to survey
 # first user is admin
 for u in User.all
-  u.subscriptions.create!(event_id: 1, admin: true)
-  u.subscriptions.create!(event_id: 2, admin: true)
-  u.subscriptions.create!(event_id: 3, admin: true)
+  u.subscriptions.create!(event_id: 1, admin: false)
+  u.subscriptions.create!(event_id: 2, admin: false)
+  u.subscriptions.create!(event_id: 3, admin: false)
   #Response.create!(user_id: u.id, option_id: (u.id % 5) + 1)
 end

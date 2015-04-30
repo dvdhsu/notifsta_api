@@ -36,7 +36,7 @@ end
 
 hack_london_start_time = DateTime.new(2015, 5, 15, 10, 0 , 0, +0)
 oxford_inspires_start_time = DateTime.new(2015, 5, 18, 10, 0, 0, +0)
-hughsball_start_time = DateTime.new(2015, 5, 9, 18, 0, 0, +0)
+hughsball_start_time = DateTime.new(2015, 5, 9, 20, 0, 0, +0)
 
 e1 = Event.create!(name: "hack_london", cover_photo_url: "http://cdn.notifsta.com/images/india.jpg",
               address: "Strand Campus, King's College London",
@@ -68,26 +68,62 @@ for event in events
   start_time = event.start_time
   end_time = event.end_time
 
-  event.subevents.create!(name: "Welcome event (general)", start_time: start_time,
-                          end_time: start_time.advance(minutes: 20), location: "Main quad", description: "To welcome everybody.")
-  event.subevents.create!(name: "Welcome event for sponsors", start_time: start_time,
-                          end_time: start_time.advance(minutes: 20), location: "Boardroom", description: "To welcome everybody.")
-  event.subevents.create!(name: "Welcome event for administrators", start_time: start_time,
-                          end_time: start_time.advance(minutes: 20), location: "Gherkin quad", description: "To welcome everybody.")
+  if event.id == 3
+    event.subevents.create!(name: "Garfunkel", start_time: start_time.advance(minutes: 15),
+                            end_time: start_time.advance(hours: 2, minutes: 15), location: "The Enchanted Court")
 
-  event.subevents.create!(name: "Roger Thiel", start_time: end_time.advance(hours: -1),
-                          end_time: end_time.advance(minutes: -30), location: "Lecture Theater 1", description: "To goodbye everybody.")
-  event.subevents.create!(name: "Mark Ramsey", start_time: end_time.advance(hours: -1),
-                          end_time: end_time.advance(minutes: -30), location: "Lecture Theater 2", description: "To goodbye everybody.")
-  event.subevents.create!(name: "Marak Mourash", start_time: end_time.advance(hours: -1), end_time: end_time.advance(minutes: -30),
-                          location: "Lecture Theater 3", description: "To goodbye everybody.")
+    event.subevents.create!(name: "Oxford Univeristy Jazz Orchestra", start_time: start_time.advance(minutes: 45),
+                          end_time: start_time.advance(hours: 2, minutes: 45), location: "Main Stage (The Glade)")
 
-  event.subevents.create!(name: "Goodbye event", start_time: end_time.advance(minutes: -20), end_time: end_time,
-                          location: "Main quad", description: "To goodbye everybody.")
-  event.subevents.create!(name: "Goodbye event for sponsors", start_time: end_time.advance(minutes: -20), end_time: end_time,
-                          location: "Boardroom", description: "To goodbye everybody.")
-  event.subevents.create!(name: "Goodbye event for administrators", start_time: end_time.advance(minutes: -20), end_time: end_time,
-                          location: "Gherkin quad", description: "To goodbye everybody.")
+    event.subevents.create!(name: "Fireworks", start_time: start_time.advance(hours: 2),
+                          end_time: start_time.advance(hours: 2, minutes: 30), location: "Main Lawn")
+
+    event.subevents.create!(name: "Billie Black", start_time: start_time.advance(hours: 2, minutes: 15),
+                          end_time: start_time.advance(hours: 2, minutes: 45), location: "The Enchanted Court")
+
+    event.subevents.create!(name: "Jamie Berry", start_time: start_time.advance(hours: 2, minutes: 15),
+                            end_time: start_time.advance(hours: 3), location: "Main Stage (The Glade)")
+
+    event.subevents.create!(name: "Switch", start_time: start_time.advance(hours: 2, minutes: 15),
+                            end_time: start_time.advance(hours: 4, minutes: 15), location: "DJ Stage (The Meadows)")
+
+    event.subevents.create!(name: "K Stewart", start_time: start_time.advance(hours: 3, minutes: 15),
+                            end_time: start_time.advance(hours: 4, minutes: 45), location: "The Enchanted Court")
+
+    event.subevents.create!(name: "Dot's Funk Odyssey", start_time: start_time.advance(hours: 3, minutes: 30),
+                            end_time: start_time.advance(hours: 4, minutes: 30), location: "Main Stage (The Glade)")
+
+    event.subevents.create!(name: "Karma Kid", start_time: start_time.advance(hours: 4, minutes: 15),
+                            end_time: start_time.advance(hours: 5, minutes: 15), location: "DJ Stage (The Meadows)")
+
+    event.subevents.create!(name: "Amber Run", start_time: start_time.advance(hours: 4, minutes: 15),
+                            end_time: start_time.advance(hours: 5, minutes: 15), location: "The Enchanted Court")
+
+    event.subevents.create!(name: "The Correspondents", start_time: start_time.advance(hours: 5),
+                            end_time: start_time.advance(hours: 6), location: "Main Stage (The Glade)")
+
+    event.subevents.create!(name: "Silent Disco", start_time: start_time.advance(hours: 6, minutes: 15),
+                            end_time: start_time.advance(hours: 8), location: "Main Stage (The Glade)")
+  else
+    event.subevents.create!(name: "Welcome event for sponsors", start_time: start_time,
+                            end_time: start_time.advance(minutes: 20), location: "Boardroom", description: "To welcome everybody.")
+    event.subevents.create!(name: "Welcome event for administrators", start_time: start_time,
+                            end_time: start_time.advance(minutes: 20), location: "Gherkin quad", description: "To welcome everybody.")
+
+    event.subevents.create!(name: "Roger Thiel", start_time: end_time.advance(hours: -1),
+                            end_time: end_time.advance(minutes: -30), location: "Lecture Theater 1", description: "To goodbye everybody.")
+    event.subevents.create!(name: "Mark Ramsey", start_time: end_time.advance(hours: -1),
+                            end_time: end_time.advance(minutes: -30), location: "Lecture Theater 2", description: "To goodbye everybody.")
+    event.subevents.create!(name: "Marak Mourash", start_time: end_time.advance(hours: -1), end_time: end_time.advance(minutes: -30),
+                            location: "Lecture Theater 3", description: "To goodbye everybody.")
+
+    event.subevents.create!(name: "Goodbye event", start_time: end_time.advance(minutes: -20), end_time: end_time,
+                            location: "Main quad", description: "To goodbye everybody.")
+    event.subevents.create!(name: "Goodbye event for sponsors", start_time: end_time.advance(minutes: -20), end_time: end_time,
+                            location: "Boardroom", description: "To goodbye everybody.")
+    event.subevents.create!(name: "Goodbye event for administrators", start_time: end_time.advance(minutes: -20), end_time: end_time,
+                            location: "Gherkin quad", description: "To goodbye everybody.")
+  end
 
   notifications = event.channels.create!(name: "Notifications")
 

@@ -51,7 +51,7 @@ e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "http://cdn.notifst
               start_time: oxford_inspires_start_time,
               end_time: oxford_inspires_start_time.advance(hours: 36),
               description: "Oxford Inspires hopes to inspire you. Let us know how we can help.",
-              facebook_url: "https://www.fb.com/hacklondonuk",
+              facebook_url: "https://www.fb.com/oxinspires",
               website_url: "http://oxfordinspires.org")
 
 e3 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthughsball.com/notifsta_background.jpeg",
@@ -59,7 +59,7 @@ e3 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthu
               start_time: hughsball_start_time,
               end_time: hughsball_start_time.advance(hours: 14),
               description: "St. Hugh's is delighted to invite you to our Ball.",
-              facebook_url: "https://www.fb.com/hacklondonuk",
+              facebook_url: "https://www.fb.com/sthughsball2015",
               website_url: "http://sthughsball.com")
 
 events = [e1, e2, e3]

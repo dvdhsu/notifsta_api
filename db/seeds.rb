@@ -34,9 +34,9 @@ u.save!
   puts "#{i} test users created..." if (i % 5 == 0)
 end
 
-hack_london_start_time = DateTime.new(2015, 5, 15, 10, 0 , 0, +0)
-oxford_inspires_start_time = DateTime.new(2015, 5, 18, 10, 0, 0, +0)
-hughsball_start_time = DateTime.new(2015, 5, 9, 20, 0, 0, +0)
+hack_london_start_time = DateTime.new(2015, 5, 15, 10, 0 , 0, "+1:00")
+oxford_inspires_start_time = DateTime.new(2015, 5, 18, 10, 0, 0, "+1:00")
+hughsball_start_time = DateTime.new(2015, 5, 9, 20, 0, 0, "+1:00")
 
 e1 = Event.create!(name: "hack_london", cover_photo_url: "http://cdn.notifsta.com/images/india.jpg",
               address: "Strand Campus, King's College London",

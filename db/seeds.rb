@@ -139,11 +139,13 @@ for event in events
     notifications.notifications.create!(type: "Message", notification_guts: "Lunch is now being served in the Main Hall.")
     notifications.notifications.create!(type: "Message", notification_guts: "Marak Mourash is about to speak about democracies in Lecture Theater 2!")
   else
-    notifications.notifications.create!(type: "Message", notification_guts: "Welcome!")
-    notifications.notifications.create!(type: "Message", notification_guts: "We have a welcome event in the main quad for general attendees right now.")
-    notifications.notifications.create!(type: "Message", notification_guts: "Champagne reception now in the atrium.")
-    notifications.notifications.create!(type: "Message", notification_guts: "Netowrking session now in Lecture Theater 2.")
-    notifications.notifications.create!(type: "Message", notification_guts: "Anthony Guo is giving a lecture on security in Lecture Theater 1.")
+    notifications.notifications.create!(type: "Message", notification_guts: "Welcome to the St. Hugh's Ball, 2015.")
+    notifications.notifications.create!(type: "Message", notification_guts: "Garfunkel will be starting in The Enchanted Court.")
+    notifications.notifications.create!(type: "Message", notification_guts: "Oxford University Jazz Orchestra will be starting on the Main Stage.")
+    notifications.notifications.create!(type: "Message", notification_guts: "Fireworks on the Main Lawn now.")
+    notifications.notifications.create!(type: "Message", notification_guts: "Switch on the DJ Stage, Billie Black in The Enchanted Court, and Jamie Berry on the Main Stage. All in 5 minutes.")
+    notifications.notifications.create!(type: "Message", notification_guts: "Get ready for the Silent Disco on the Main Stage in 5 minutes!")
+    notifications.notifications.create!(type: "Message", notification_guts: "Still around? We've got breakfast at 6.")
   end
 
 =begin

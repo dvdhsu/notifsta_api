@@ -34,20 +34,22 @@ u.save!
   puts "#{i} test users created..." if (i % 5 == 0)
 end
 
-now = DateTime.current
+hack_london_start_time = DateTime.new(2015, 5, 15, 10, 0 , 0, +0)
+oxford_inspires_start_time = DateTime.new(2015, 5, 18, 10, 0, 0, +0)
+hughsball_start_time = DateTime.new(2015, 5, 9, 18, 0, 0, +0)
 
-e1 = Event.create!(name: "hack_london", cover_photo_url: "http://www.get-covers.com/wp-content/uploads/2012/02/Wooden.jpg",
+e1 = Event.create!(name: "hack_london", cover_photo_url: "http://cdn.notifsta.com/images/india.jpg",
               address: "Strand Campus, King's College London",
-              start_time: now.advance(months: 3),
-              end_time: now.advance(months: 3, hours: 24),
+              start_time: hack_london_start_time,
+              end_time: hack_london_start_time.advance(days: 1),
               description: "Hack London is the largest U.K. hackathon. We hope you enjoy your time here.",
               facebook_url: "https://www.fb.com/hacklondonuk",
               website_url: "http://hacklondon.org")
 
-e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "http://www.f-covers.com/cover/colorful-hearts-facebook-cover-timeline-banner-for-fb.jpg",
+e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "http://cdn.notifsta.com/images/walking.jpg",
               address: "Said Business School, Oxford, UK",
-              start_time: now.advance(months: -2),
-              end_time: now.advance(months: -2, hours: 3),
+              start_time: oxford_inspires_start_time,
+              end_time: oxford_inspires_start_time.advance(hours: 36),
               description: "Oxford Inspires hopes to inspire you. Let us know how we can help.",
               facebook_url: "https://www.fb.com/hacklondonuk",
               website_url: "http://oxfordinspires.org")
@@ -55,8 +57,8 @@ e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "http://www.f-cover
 e3 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthughsball.com/notifsta_background.jpeg",
               event_map_url: "http://cdn.notifsta.com/event_maps/hughs.jpg",
               address: "St. Hugh's College, Oxford, UK",
-              start_time: now.advance(months: 1),
-              end_time: now.advance(months: 1, hours: 8),
+              start_time: hughsball_start_time,
+              end_time: hughsball_start_time.advance(hours: 14),
               description: "St. Hugh's is delighted to invite you to our Ball.",
               facebook_url: "https://www.fb.com/hacklondonuk",
               website_url: "http://sthughsball.com")

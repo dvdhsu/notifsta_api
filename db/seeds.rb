@@ -55,7 +55,6 @@ e2 = Event.create!(name: "Oxford Inspires", cover_photo_url: "http://cdn.notifst
               website_url: "http://oxfordinspires.org")
 
 e3 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthughsball.com/notifsta_background.jpeg",
-              event_map_url: "http://cdn.notifsta.com/event_maps/hughs.jpg",
               address: "St. Hugh's College, Oxford, UK",
               start_time: hughsball_start_time,
               end_time: hughsball_start_time.advance(hours: 14),

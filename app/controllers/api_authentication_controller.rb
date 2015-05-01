@@ -83,16 +83,22 @@ class ApiAuthenticationController < ApplicationController
   private
     def render_user(user)
       if params[:ios]
-        render json: { status: "success", data: user.as_json(
+        data = user.as_json(
           include: {
             events: {
               include: {
                 channels: {include: :notifications },
-                subevents: {},
               }
             }
           }
-        )}
+        )
+        for event in data["events"]
+          @event = Event.find(event["id"].to_i)
+          @subevents = @event.subevents.group_by { |s| s.start_time.to_formatted_s(:iso8601) }
+          event["subevents"] = @subevents.as_json
+        end
+
+        render json: { status: "success", data: data }
       else
         render json: { status: "success", data: user.as_json(
           include: {

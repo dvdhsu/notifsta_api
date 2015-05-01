@@ -6,28 +6,7 @@ class ApiAuthenticationController < ApplicationController
   def login
     @user = User.where(email: params[:email]).first
     if not @user.nil? and @user.valid_password?(params[:password])
-      if params[:ios]
-        render json: { status: "success", data: @user.as_json(
-          include: {
-            events: {
-              include: {
-                channels: {include: :notifications },
-                subevents: {},
-              }
-            } 
-          }
-        )}
-      else
-        render json: { status: "success", data: @user.as_json(
-          include: {
-            events: {
-              include: {
-                channels: {},
-              }
-            } 
-          }
-        )}
-      end
+      render_user(@user)
     else
       render json: { status: "failure" }
     end
@@ -36,7 +15,7 @@ class ApiAuthenticationController < ApplicationController
   def login_with_token
     @user = User.where(email: params[:email]).first
     if not @user.nil? and @user.authentication_token == params[:token]
-      render json: { status: "success", data: @user.as_json(include: { events: { include: :channels } }) }
+      render_user(@user)
     else
       render json: { status: "failure" }
     end
@@ -83,7 +62,7 @@ class ApiAuthenticationController < ApplicationController
       end
     end
     # user created, and facebook token is valid
-    render json: { status: "success", data: @user.as_json(include: { events: { include: :channels } }) }
+    render_user(@user)
   end
 
   def register
@@ -91,7 +70,7 @@ class ApiAuthenticationController < ApplicationController
     if @user.valid?
       @user.skip_confirmation!
       @user.save!
-      render json: { status: "success", data: @user.as_json(include: { events: { include: :channels } }) }
+      render_user(@user)
     else
       render json: { status: "failure", error: "User invalid." }
     end
@@ -100,4 +79,32 @@ class ApiAuthenticationController < ApplicationController
   def get_authentication_token
     render json: { status: "success", data: { authentication_token: current_user.authentication_token } }
   end
+
+  private
+    def render_user(user)
+      if params[:ios]
+        render json: { status: "success", data: user.as_json(
+          include: {
+            events: {
+              include: {
+                channels: {include: :notifications },
+                subevents: {},
+              }
+            }
+          }
+        )}
+      else
+        render json: { status: "success", data: user.as_json(
+          include: {
+            events: {
+              include: {
+                channels: {},
+              }
+            }
+          }
+        )}
+      end
+    end
+
+
 end

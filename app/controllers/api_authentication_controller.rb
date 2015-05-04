@@ -10,6 +10,7 @@ class ApiAuthenticationController < ApplicationController
     else
       render json: { status: "failure" }
     end
+    return
   end
 
   def login_with_token
@@ -34,6 +35,7 @@ class ApiAuthenticationController < ApplicationController
   end
 
   def facebook_register_or_login
+
     @user = User.where(facebook_id: params[:facebook_id]).first
     if @user.nil?
       @user = User.new(
@@ -41,6 +43,17 @@ class ApiAuthenticationController < ApplicationController
         email: params[:email],
       )
       if @user.check_facebook_token(params[:facebook_token])
+        # if the user already exists, let's just add facebook_token to their
+        # account
+        @user_with_email = User.where(email: params[:email]).first
+        if @user_with_email
+          # the user previously had an account with us, under their email
+          @user_with_email.facebook_token = params[:facebook_token]
+          @user_with_email.facebook_id = params[:facebook_id]
+          render_user(@user_with_email)
+          return
+        end
+
         # fb token is valid, so create user and render
         @user.facebook_token = params[:facebook_token]
         @user.password = SecureRandom.uuid

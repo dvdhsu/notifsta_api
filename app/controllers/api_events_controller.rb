@@ -14,7 +14,13 @@ class ApiEventsController < ApplicationController
     @not_my_events = Event.find(@all_event_ids - @my_event_ids)
 
     render json: { status: "success", data:
-                   { subscribed: @my_events.as_json, not_subscribed: @not_my_events.as_json }
+                   { subscribed: @my_events.as_json(
+                       include: {channels: {}}
+                     ), 
+                     not_subscribed: @not_my_events.as_json(
+                       include: {channels: {}}
+                     )
+                   }
                  }
   end
 

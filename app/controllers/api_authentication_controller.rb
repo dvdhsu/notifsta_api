@@ -113,7 +113,7 @@ class ApiAuthenticationController < ApplicationController
 
         render json: { status: "success", data: data }
       else
-        render json: { status: "success", data: user.as_json(
+        data = user.as_json(
           include: {
             events: {
               include: {
@@ -121,9 +121,9 @@ class ApiAuthenticationController < ApplicationController
               }
             }
           }
-        )}
+        )
+        data["subscriptions"] = user.subscriptions.as_json
+        render json: { status: "success", data: data }
       end
     end
-
-
 end

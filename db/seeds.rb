@@ -26,7 +26,7 @@ orielball_start_time = DateTime.new(2015, 5, 18, 10, 0, 0, "+1:00")
 hughsball_start_time = DateTime.new(2015, 5, 9, 20, 0, 0, "+1:00")
 
 e1 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthughsball.com/notifsta_background.jpeg",
-              address: "St. Hugh's College, Oxford, UK",
+              address: "St. Hugh's College, Oxford",
               start_time: hughsball_start_time,
               end_time: hughsball_start_time.advance(hours: 14),
               description: "St. Hugh's is delighted to invite you to our Ball.",

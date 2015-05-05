@@ -43,7 +43,7 @@ e1 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthu
               description: "St. Hugh's is delighted to invite you to our Ball.",
               facebook_url: "https://www.fb.com/sthughsball2015",
               website_url: "http://sthughsball.com",
-              event_map_url: "http://cdn.notifsta.com/event_maps/hughs.jpg")
+              event_map_url: "http://cdn.notifsta.com/event_maps/hughs.png")
 
 e2 = Event.create!(name: "Hack London", cover_photo_url: "http://cdn.notifsta.com/images/walking.jpg",
               address: "Strand Campus, King's College London",

@@ -3,20 +3,31 @@
 
 # Temporary admin account
 u = User.new(
-    email: "admin@example.com",
-    password: "asdf",
-    password_confirmation: "asdf",
-    admin: true
+  email: "admin@example.com",
+  password: "asdf",
+  password_confirmation: "asdf",
+  admin: false
+)
+
+u.skip_confirmation!
+u.save!
+
+# account for Apple Review
+u = User.new(
+  email: "apple@apple.com",
+  password: "asdf",
+  password_confirmation: "asdf",
+  admin: false
 )
 u.skip_confirmation!
 u.save!
 
 # account for Apple Review
 u = User.new(
-    email: "apple@apple.com",
-    password: "asdf",
-    password_confirmation: "asdf",
-    admin: false
+  email: "president@sthughsball.com",
+  password: "president",
+  password_confirmation: "president",
+  admin: false
 )
 u.skip_confirmation!
 u.save!
@@ -122,3 +133,8 @@ for u in User.all
   u.subscriptions.create!(event_id: 3, admin: false)
   #Response.create!(user_id: u.id, option_id: (u.id % 5) + 1)
 end
+
+u = User.where(email: "president@sthughsball.com").first
+s = u.subscriptions.where(event_id: 1).first
+s.admin = true
+s.save!

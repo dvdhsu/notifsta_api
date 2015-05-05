@@ -28,7 +28,7 @@ hughsball_start_time = DateTime.new(2015, 5, 9, 20, 0, 0, "+1:00")
 e1 = Event.create!(name: "St. Hugh's Ball, 2015", cover_photo_url: "https://sthughsball.com/notifsta_background.jpeg",
               address: "St. Hugh's College, Oxford",
               start_time: hughsball_start_time,
-              end_time: hughsball_start_time.advance(hours: 14),
+              end_time: hughsball_start_time.advance(hours: 8, minutes: 30),
               description: "St. Hugh's is delighted to invite you to our Ball.",
               facebook_url: "https://www.fb.com/sthughsball2015",
               website_url: "http://sthughsball.com",
@@ -57,25 +57,25 @@ for event in events
 
   if event.id == 1
     event.subevents.create!(name: "Garfunkel", start_time: start_time.advance(minutes: 15),
-                            end_time: start_time.advance(hours: 2, minutes: 15), location: "The Enchanted Court")
+                            end_time: start_time.advance(hours: 1, minutes: 15), location: "The Enchanted Court")
 
     event.subevents.create!(name: "Oxford Univeristy Jazz Orchestra", start_time: start_time.advance(minutes: 45),
-                          end_time: start_time.advance(hours: 2, minutes: 45), location: "Main Stage (The Glade)")
+                          end_time: start_time.advance(hours: 1, minutes: 45), location: "Main Stage (The Glade)")
 
     event.subevents.create!(name: "Fireworks", start_time: start_time.advance(hours: 2),
-                          end_time: start_time.advance(hours: 2, minutes: 30), location: "Main Lawn")
+                          end_time: start_time.advance(hours: 2, minutes: 15), location: "Main Lawn")
 
     event.subevents.create!(name: "Billie Black", start_time: start_time.advance(hours: 2, minutes: 15),
-                          end_time: start_time.advance(hours: 2, minutes: 45), location: "The Enchanted Court")
+                          end_time: start_time.advance(hours: 3), location: "The Enchanted Court")
 
     event.subevents.create!(name: "Jamie Berry", start_time: start_time.advance(hours: 2, minutes: 15),
-                            end_time: start_time.advance(hours: 3), location: "Main Stage (The Glade)")
+                            end_time: start_time.advance(hours: 3, minutes: 15), location: "Main Stage (The Glade)")
 
     event.subevents.create!(name: "Switch", start_time: start_time.advance(hours: 2, minutes: 15),
                             end_time: start_time.advance(hours: 4, minutes: 15), location: "DJ Stage (The Meadows)")
 
     event.subevents.create!(name: "K Stewart", start_time: start_time.advance(hours: 3, minutes: 15),
-                            end_time: start_time.advance(hours: 4, minutes: 45), location: "The Enchanted Court")
+                            end_time: start_time.advance(hours: 3, minutes: 45), location: "The Enchanted Court")
 
     event.subevents.create!(name: "Dot's Funk Odyssey", start_time: start_time.advance(hours: 3, minutes: 30),
                             end_time: start_time.advance(hours: 4, minutes: 30), location: "Main Stage (The Glade)")
@@ -86,7 +86,7 @@ for event in events
     event.subevents.create!(name: "Amber Run", start_time: start_time.advance(hours: 4, minutes: 15),
                             end_time: start_time.advance(hours: 5, minutes: 15), location: "The Enchanted Court")
 
-    event.subevents.create!(name: "The Correspondents", start_time: start_time.advance(hours: 5),
+    event.subevents.create!(name: "The Correspondents", start_time: start_time.advance(hours: 5, minutes: 15),
                             end_time: start_time.advance(hours: 6), location: "Main Stage (The Glade)")
 
     event.subevents.create!(name: "Silent Disco", start_time: start_time.advance(hours: 6, minutes: 15),

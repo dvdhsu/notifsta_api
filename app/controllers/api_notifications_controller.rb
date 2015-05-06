@@ -36,7 +36,8 @@ class ApiNotificationsController < ApplicationController
 
     # either the channel doesn't exist, the user isn't subscribed to the event,
     # or the user isn't an admin on the event
-    if @channel.nil? || subscription.nil? ||(not subscription.admin)
+    # if user is global admin, we bypass check
+    if (@channel.nil? || subscription.nil? ||(not subscription.admin)) and not current_user.admin
       render json: { status: "failure", error: "Channel not found, or unauthorized." }
     else
       begin

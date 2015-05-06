@@ -39,11 +39,14 @@ class ApiSubscriptionsController < ApplicationController
 
   # DELETE /subscriptions/1.json
   def destroy
-    if params[:ios]
-      @subscription = Subscription.where(user_id: current_user.id, event_id: params[:event_id])
-    elsif
-      @subscription = Subscription.find_by_id(params[:id])
-    end
+    @subscription = Subscription.find_by_id(params[:id])
+    authorize! :destroy, @subscription
+    @subscription.destroy!
+    render json: { status: "success" }
+  end
+
+  def delete_by_event_id
+    @subscription = current_user.subscriptions.where(event_id: params[:event_id]).first
     authorize! :destroy, @subscription
     @subscription.destroy!
     render json: { status: "success" }

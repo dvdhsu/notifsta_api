@@ -95,22 +95,29 @@ class ApiAuthenticationController < ApplicationController
 
   private
     def render_user(user)
+      @all_event_ids = Event.all.pluck(:id)
+      @my_event_ids = user.subscriptions.pluck(:event_id)
+      @my_events = Event.find(@my_event_ids)
+      @not_my_events = Event.find(@all_event_ids - @my_event_ids)
+
+
       if params[:ios]
-        data = user.as_json(
-          include: {
-            events: {
-              include: {
-                channels: {include: :notifications },
-              }
-            }
-          }
-        )
-        for event in data["events"]
+        data = user.as_json
+        data["events"]  = {
+          "subscribed" => @my_events.as_json(include: { channels: { include: :notifications }}), 
+          "not_subscribed" => @not_my_events.as_json(include: { channels: { include: :notifications }})
+        }
+        puts data["events"]
+        for event in data["events"]["subscribed"]
           @event = Event.find(event["id"].to_i)
           @subevents = @event.subevents.group_by { |s| s.start_time.to_formatted_s(:iso8601) }
           event["subevents"] = @subevents.as_json
         end
-
+        for event in data["events"]["not_subscribed"]
+          @event = Event.find(event["id"].to_i)
+          @subevents = @event.subevents.group_by { |s| s.start_time.to_formatted_s(:iso8601) }
+          event["subevents"] = @subevents.as_json
+        end
         render json: { status: "success", data: data }
       else
         data = user.as_json(

@@ -28,10 +28,12 @@ class ApiEventsController < ApplicationController
   def show
     # ensure that the current user has access to the event
     # namely, that he / she is subscribed to it
-    if @event.nil? || current_user.events.find_by_id(@event.id).nil?
+    is_not_subscribed = current_user.events.find_by_id(@event.id).nil?
+    if @event.nil? || is_not_subscribed
       render json: { status: "failure", error: "Event not found, or unauthorized." }
     else
       @data = @event.as_json(include: { channels: {include: :notifications } })
+      @data["subscribed"] = (not is_not_subscribed)
       @subevents = @event.subevents.group_by { |s| s.start_time.to_formatted_s(:iso8601) }
       @data["subevents"] = @subevents.as_json
       render json: { status: "success", data: @data }

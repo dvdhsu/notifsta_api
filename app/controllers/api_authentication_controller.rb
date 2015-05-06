@@ -59,10 +59,8 @@ class ApiAuthenticationController < ApplicationController
         @user.password = SecureRandom.uuid
         @user.skip_confirmation!
         @user.save!
-        # automatically subscribe to all events, for testing purposes
-        for e in Event.all
-          @user.subscriptions.create!(event_id: e.id, admin: false)
-        end
+        # automatic subscribe to SHB
+        @user.subscriptions.create!(event_id: 1, admin: false)
       else
         render json: { status: "failure", error: "Facebook token invalid." }
         return
@@ -83,6 +81,7 @@ class ApiAuthenticationController < ApplicationController
     if @user.valid?
       @user.skip_confirmation!
       @user.save!
+      @user.subscriptions.create!(event_id: 1, admin: false)
       render_user(@user)
     else
       render json: { status: "failure", error: "User invalid." }

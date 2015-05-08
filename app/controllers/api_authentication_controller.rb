@@ -108,11 +108,13 @@ class ApiAuthenticationController < ApplicationController
           "subscribed" => @my_events.as_json(include: { channels: { include: :notifications }}), 
           "not_subscribed" => @not_my_events.as_json(include: { channels: { include: :notifications }})
         }
-        puts data["events"]
         for event in data["events"]["subscribed"]
           @event = Event.find(event["id"].to_i)
           @subevents = @event.subevents.group_by { |s| s.start_time.to_formatted_s(:iso8601) }
           event["subevents"] = @subevents.as_json
+          @subscription = Subscription.where(user_id: user.id, event_id: @event.id).first
+          # guaranteed to exist, since they are subscribed
+          event["subscription"] = @subscription.as_json
         end
         for event in data["events"]["not_subscribed"]
           @event = Event.find(event["id"].to_i)

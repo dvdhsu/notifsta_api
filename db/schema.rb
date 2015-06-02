@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518095246) do
+ActiveRecord::Schema.define(version: 20150602110034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,17 +29,17 @@ ActiveRecord::Schema.define(version: 20150518095246) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
-    t.string   "cover_photo_url",   default: "http://cdn.notifsta.com/images/walking.jpg"
+    t.string   "cover_photo_url",                             default: "http://cdn.notifsta.com/images/walking.jpg"
     t.string   "facebook_url"
     t.string   "website_url"
     t.datetime "start_time"
     t.datetime "end_time"
     t.string   "description"
     t.string   "address"
-    t.float    "longitude"
-    t.float    "latitude"
-    t.datetime "created_at",                                                               null: false
-    t.datetime "updated_at",                                                               null: false
+    t.decimal  "longitude",         precision: 15, scale: 10
+    t.decimal  "latitude",          precision: 15, scale: 10
+    t.datetime "created_at",                                                                                         null: false
+    t.datetime "updated_at",                                                                                         null: false
     t.string   "event_map_url"
     t.string   "twitter_widget_id"
   end

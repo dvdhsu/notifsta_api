@@ -61,7 +61,7 @@ class ApiAuthenticationController < ApplicationController
         @user.save!
         # automatic subscribe to SHB
         # automatic subscbibe to Keble for now
-        @user.subscriptions.create!(event_id: 42, admin: false)
+        @user.subscriptions.create!(event_id: 28, admin: false)
       else
         render json: { status: "failure", error: "Facebook token invalid." }
         return
@@ -83,7 +83,7 @@ class ApiAuthenticationController < ApplicationController
       @user.skip_confirmation!
       @user.save!
       # auto sub Keble
-      @user.subscriptions.create!(event_id: 42, admin: false)
+      @user.subscriptions.create!(event_id: 28, admin: false)
       render_user(@user)
     else
       render json: { status: "failure", error: "User invalid." }

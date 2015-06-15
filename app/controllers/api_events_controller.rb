@@ -1,7 +1,7 @@
 class ApiEventsController < ApplicationController
   acts_as_token_authentication_handler_for User, fallback_to_devise: false
 
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :check_admin]
   before_action :verify_logged_in
   before_action :parse_dates, only: [:update, :create]
 
@@ -36,6 +36,12 @@ class ApiEventsController < ApplicationController
       @data["subevents"] = @subevents.as_json
       render json: { status: "success", data: @data }
     end
+  end
+
+  def check_admin
+    puts @event.id
+    authorize! :manage, @event
+    render json: { status: "success" }
   end
 
   # POST /events.json

@@ -19,6 +19,9 @@ NotifstaWebapp::Application.routes.draw do
       resources :subscriptions, only: :index, controller: :api_subscriptions
       resources :subevents, only: [:index, :create], controller: :api_subevents
       delete 'subscription', to: 'api_subscriptions#delete_by_event_id'
+      member do
+        get 'check_admin'
+      end
     end
     resources :subevents, only: [:destroy, :update], controller: :api_subevents
     resources :channels, only: [:show], controller: :api_channels do

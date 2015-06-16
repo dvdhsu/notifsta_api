@@ -51,7 +51,14 @@ module NotifstaWebapp
       harmony: true
     }
 
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
+
     # opt in to errors in callbacks
-   config.active_record.raise_in_transactional_callbacks = true
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

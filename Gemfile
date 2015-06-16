@@ -15,6 +15,7 @@ gem 'oj'
 gem 'cancancan', '~> 1.10'
 gem 'geocoder'
 gem 'rest-client'
+gem 'rack-cors', :require => 'rack/cors'
 
 # Standard Rails gems
 gem 'rails', '4.2.0'

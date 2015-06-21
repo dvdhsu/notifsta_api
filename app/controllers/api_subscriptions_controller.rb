@@ -7,7 +7,7 @@ class ApiSubscriptionsController < ApplicationController
     # unfortunately, Cancancan is of no help here...
     # https://github.com/ryanb/cancan/wiki/Authorizing-controller-actions
     @event = Event.find_by_id(params[:event_id])
-    if @event.nil? || @event.admins.where(user_id: current_user.id).empty?
+    if @event.nil? || (@event.admins.where(user_id: current_user.id).empty? && (not current_user.admin?))
       render json: { status: "failure", error: "Event not found, or unauthorized." }
     else
       render json: { status: "success", data: @event.subscriptions.as_json }

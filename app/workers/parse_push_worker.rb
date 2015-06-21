@@ -12,7 +12,7 @@ class ParsePushWorker
       event: @notification.channel.event.id,
       # TODO: this needs to be changed to channel.id
       channel: @notification.channel.guid,
-      eventName: @notification.channel.event.name,
+      event_name: @notification.channel.event.name,
     }
     # TODO: this needs to be changed to channel.id
     push = Parse::Push.new(data, @notification.channel.guid)

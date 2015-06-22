@@ -10,7 +10,8 @@ class ApiSubscriptionsController < ApplicationController
     if @event.nil? || (@event.admins.where(user_id: current_user.id).empty? && (not current_user.admin?))
       render json: { status: "failure", error: "Event not found, or unauthorized." }
     else
-      render json: { status: "success", data: @event.subscriptions.as_json }
+      @joined = @event.subscriptions.joins(:user).select('users.email, subscriptions.*')
+      render json: { status: "success", data: @joined.as_json }
     end
   end
 

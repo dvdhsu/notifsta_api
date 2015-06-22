@@ -2,6 +2,7 @@ class ApiSubscriptionsController < ApplicationController
   acts_as_token_authentication_handler_for User, fallback_to_devise: false
 
   before_action :verify_logged_in
+  before_action :set_subscription, only: [:show, :flip_admin, :destroy]
 
   def index
     # unfortunately, Cancancan is of no help here...
@@ -17,12 +18,21 @@ class ApiSubscriptionsController < ApplicationController
 
   # GET /subscriptions/1.json
   def show
-    @subscription = Subscription.find_by_id(params[:id])
     authorize! :show, @subscription
     if @subscription.nil?
       render json: { status: "failure", error: "Subscription not found." }
     else
       render json: { status: "success", data: @subscription.as_json }
+    end
+  end
+
+  def flip_admin
+    if @subscription.nil?  || (@subscription.event.admins.where(user_id: current_user.id).empty? && (not current_user.admin?))
+      render json: { status: "failure", error: "Subscription not found, or unauthorized." }
+    else
+      @subscription.admin = (not @subscription.admin)
+      @subscription.save!
+      render json: { status: "success", data: @subscription }
     end
   end
 
@@ -40,7 +50,6 @@ class ApiSubscriptionsController < ApplicationController
 
   # DELETE /subscriptions/1.json
   def destroy
-    @subscription = Subscription.find_by_id(params[:id])
     authorize! :destroy, @subscription
     @subscription.destroy!
     render json: { status: "success" }
@@ -51,5 +60,9 @@ class ApiSubscriptionsController < ApplicationController
     authorize! :destroy, @subscription
     @subscription.destroy!
     render json: { status: "success" }
+  end
+
+  def set_subscription
+    @subscription = Subscription.find_by_id(params[:id])
   end
 end

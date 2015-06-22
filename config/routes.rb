@@ -44,4 +44,6 @@ NotifstaWebapp::Application.routes.draw do
     resources :users
   end
 
+  match "*path", to: "options#render_204", via: [:options]
+
 end

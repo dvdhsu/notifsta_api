@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150619191427) do
+ActiveRecord::Schema.define(version: 20150703075239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20150619191427) do
     t.string   "event_map_url"
     t.string   "twitter_widget_id"
     t.string   "timezone",                                    default: "Europe/London"
+    t.boolean  "published",                                   default: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

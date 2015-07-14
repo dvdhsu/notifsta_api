@@ -17,6 +17,8 @@ gem 'geocoder'
 gem 'rest-client'
 gem 'rack-cors', :require => 'rack/cors'
 
+gem 'bazaar'
+
 # Standard Rails gems
 gem 'rails', '4.2.0'
 gem 'sass-rails', '5.0.1'

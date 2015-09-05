@@ -16,6 +16,7 @@ gem 'cancancan', '~> 1.10'
 gem 'geocoder'
 gem 'rest-client'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 gem 'bazaar'
 

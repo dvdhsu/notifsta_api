@@ -4,6 +4,7 @@ NotifstaWebapp::Application.routes.draw do
   post 'v1/events/:id', to: 'api_events#update', as: 'hacky_event_update'
   post 'v1/subevents/:id', to: 'api_subevents#update', as: 'hacky_subevent_update'
   scope 'v1' do
+    resources :payments
     scope 'auth' do
       get 'login' => 'api_authentication#login'
       get 'logout' => 'api_authentication#logout'

@@ -9,6 +9,14 @@ GIT
       rails (>= 3.1)
       react-source (~> 0.12)
 
+GIT
+  remote: https://github.com/stripe/stripe-ruby
+  revision: 5e3474c70cc4f140fe195fd51a5529ea8b23ca2f
+  specs:
+    stripe (1.25.0)
+      json (~> 1.8.1)
+      rest-client (~> 1.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -293,8 +301,12 @@ DEPENDENCIES
   sidekiq
   simple_token_authentication (~> 1.0)
   spring (= 1.2.0)
+  stripe!
   turbolinks (= 2.5.3)
   tzinfo-data
   uglifier (= 2.6.0)
   web-console (= 2.0.0)
   websocket-rails
+
+BUNDLED WITH
+   1.10.6

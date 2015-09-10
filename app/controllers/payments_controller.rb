@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   def create
-    @amount = 100
+    @amount = 10000
     puts params
 
     customer = Stripe::Customer.create(

@@ -92,6 +92,6 @@ class ApiEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :cover_photo_url, :start_time, :end_time, :description, :address, :event_map_url, :twitter_widget_id, :timezone, :published)
+      params.require(:event).permit(:name, :cover_photo_url, :start_time, :end_time, :description, :address, :event_map_url, :twitter_widget_id, :timezone, :published, :website_url, :facebook_url)
     end
 end

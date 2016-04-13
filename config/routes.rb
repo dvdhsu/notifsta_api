@@ -1,6 +1,9 @@
 NotifstaWebapp::Application.routes.draw do
   root to: 'pages#home'
 
+  get 'facebook_bot/:event_id' => 'facebook_bot#get'
+  post 'facebook_bot/:event_id' => 'facebook_bot#post'
+
   post 'v1/events/:id', to: 'api_events#update', as: 'hacky_event_update'
   post 'v1/subevents/:id', to: 'api_subevents#update', as: 'hacky_subevent_update'
   scope 'v1' do
